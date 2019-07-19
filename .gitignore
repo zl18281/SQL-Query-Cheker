@@ -1,0 +1,11 @@
+/node_modules
+/npm-debug.log
+/package-lock.json
+/test*.html
+.tern-*
+*~
+*.swp
+.idea
+*.iml
+/lib/codemirror.js
+/demo

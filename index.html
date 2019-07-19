@@ -1,0 +1,53 @@
+<!doctype html>
+
+<title>CodeMirror: Full Screen Editing</title>
+<meta charset="utf-8"/>
+<link rel=stylesheet href="doc/docs.css">
+
+<link rel="stylesheet" href="lib/codemirror.css">
+<link rel="stylesheet" href="addon/display/fullscreen.css">
+<link rel="stylesheet" href="theme/night.css">
+<link rel="stylesheet" href="addon/hint/show-hint.css">
+
+<script src="lib/codemirror.js"></script>
+<script src="mode/sql/sql.js"></script>
+<script src="addon/display/fullscreen.js"></script>
+<script src="addon/hint/show-hint.js"></script>
+<script src="addon/hint/sql-hint.js"></script>
+
+<div id=nav>
+    <a href="https://codemirror.net"><h1>CodeMirror</h1><img id=logo src="doc/logo.png"></a>
+
+    <ul>
+        <li><a href="index.html">Home</a>
+        <li><a href="doc/manual.html">Manual</a>
+        <li><a href="https://github.com/codemirror/codemirror">Code</a>
+    </ul>
+    <ul>
+        <li><a class=active href="#">Full Screen Editing</a>
+    </ul>
+</div>
+
+<article>
+    <h2>Full Screen Editing</h2>
+    <form><textarea id="code" name="code" rows="5"></textarea></form>
+    <button>Compile</button>
+    <button>Save</button>
+    <script>
+        CodeMirror.commands.autocomplete = function(cm) {
+        cm.showHint({hint: CodeMirror.hint.anyword});
+        }
+        var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
+            lineNumbers: true,
+            theme: "night",
+            extraKeys: {
+                "F11": function(cm) {
+                    cm.setOption("fullScreen", !cm.getOption("fullScreen"));
+                },
+                "Esc": function(cm) {
+                    if (cm.getOption("fullScreen")) cm.setOption("fullScreen", false);
+                }
+            }
+        });
+    </script>
+</article>
