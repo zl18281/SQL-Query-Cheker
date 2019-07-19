@@ -1,0 +1,13 @@
+<web-app>
+
+<servlet>
+<servlet-name>mainPage</servlet-name>
+<servlet-class>MainPageServlet</servlet-class>
+</servlet>
+
+<servlet-mapping>
+<servlet-name>mainPage</servlet-name>
+<url-pattern>/sqlEditor</url-pattern>
+</servlet-mapping>
+
+</web-app>
