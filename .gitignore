@@ -1,12 +1,4 @@
-*/npm-debug.log
-*/package-lock.json
-*/test*.html
-.tern-*
-*~
-*.swp
-.idea
-*.iml
-*/lib/codemirror.js
-*/demo
-*/node_modules
+./src/main/webapp/node_modules
+./src/main/webapp/demo
+./target
 
