@@ -1,33 +1,58 @@
 package com.fan.parser;
 
+import org.antlr.v4.runtime.ANTLRErrorListener;
 import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
-import org.antlr.v4.runtime.tree.ParseTree;
+
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.Scanner;
 
 public class ParserDemo {
 
-    private String code;
+  private String code;
 
-    public ParserDemo(String code) {
-        System.out.println("hahaha");
-        this.code = code;
+  public ParserDemo(String code) {
+    System.out.println("hahaha");
+    this.code = code;
+  }
+
+  public String parseSql() {
+
+    ANTLRErrorListener error = new UnderlineListener();
+    CharStream input = CharStreams.fromString(this.code);
+    MySqlLexer lexer = new MySqlLexer(input);
+    CommonTokenStream tokens = new CommonTokenStream(lexer);
+    MySqlParser parser = new MySqlParser(tokens);
+    parser.removeErrorListeners();
+    parser.addErrorListener(error);
+    parser.root();
+    System.out.println("right after parsing");
+
+    File f = new File("/home/fan/error.txt");
+    System.out.println("file opened");
+    try (Scanner in = new Scanner(f)) {
+      String errorInfo = "";
+      while (in.hasNext()) {
+        errorInfo += (in.next() + " ");
+      }
+      try (FileWriter fw = new FileWriter(f)) {
+        fw.write("");
+      } catch (IOException ex) {
+        System.err.println("file not found !");
+      }
+      return errorInfo;
+    } catch (IOException e) {
+      System.err.println("file not found !");
     }
+    return "";
+  }
 
-    public String parseSql() {
-        CharStream input = CharStreams.fromString(this.code);
-        MySqlLexer lexer = new MySqlLexer(input);
-        CommonTokenStream tokens = new CommonTokenStream(lexer);
-        MySqlParser parser = new MySqlParser(tokens);
-        parser.removeErrorListeners();
-        parser.addErrorListener(new VerboseListener());
-        ParseTree tree = parser.root();
-        return tree.toStringTree(parser);
-
-    }
-
-    public static void main (String[] args) {
-        ParserDemo pd = new ParserDemo("SELECT FROM hero WHERE name='fan';");
-        System.out.println(pd.parseSql());
-    }
+  public static void main(String[] args) {
+    ParserDemo pd = new ParserDemo("SELECT FROM hero WHERE name='fan';");
+    System.out.println(pd.parseSql());
+  }
 }

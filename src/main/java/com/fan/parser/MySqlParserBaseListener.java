@@ -18,7 +18,8 @@ public class MySqlParserBaseListener implements MySqlParserListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterRoot(MySqlParser.RootContext ctx) { }
+	@Override public void enterRoot(MySqlParser.RootContext ctx) {
+  }
 	/**
 	 * {@inheritDoc}
 	 *

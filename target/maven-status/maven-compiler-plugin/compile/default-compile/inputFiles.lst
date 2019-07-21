@@ -1,7 +1,9 @@
-/home/fan/sql-editor/src/main/java/com/fan/parser/VerboseListener.java
-/home/fan/sql-editor/src/main/java/com/fan/MainPageServlet.java
-/home/fan/sql-editor/src/main/java/com/fan/parser/MySqlParserBaseListener.java
-/home/fan/sql-editor/src/main/java/com/fan/parser/MySqlLexer.java
-/home/fan/sql-editor/src/main/java/com/fan/parser/MySqlParserListener.java
-/home/fan/sql-editor/src/main/java/com/fan/parser/MySqlParser.java
-/home/fan/sql-editor/src/main/java/com/fan/parser/ParserDemo.java
+/home/fan/SQL/src/main/java/com/fan/parser/MySqlParserVisitor.java
+/home/fan/SQL/src/main/java/com/fan/parser/MySqlParserListener.java
+/home/fan/SQL/src/main/java/com/fan/parser/MySqlParser.java
+/home/fan/SQL/src/main/java/com/fan/parser/VerboseListener.java
+/home/fan/SQL/src/main/java/com/fan/parser/MySqlParserBaseVisitor.java
+/home/fan/SQL/src/main/java/com/fan/parser/ParserDemo.java
+/home/fan/SQL/src/main/java/com/fan/MainPageServlet.java
+/home/fan/SQL/src/main/java/com/fan/parser/MySqlLexer.java
+/home/fan/SQL/src/main/java/com/fan/parser/MySqlParserBaseListener.java
