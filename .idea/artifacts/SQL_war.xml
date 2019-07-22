@@ -7,7 +7,7 @@
         <packaging>war</packaging>
       </options>
     </properties>
-    <root id="archive" name="sql-editor.war">
+    <root id="archive" name="SQL.war">
       <element id="artifact" artifact-name="SQL:war exploded" />
     </root>
   </artifact>

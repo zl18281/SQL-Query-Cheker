@@ -7,6 +7,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 
@@ -24,6 +25,12 @@ public class MainPageServlet extends HttpServlet {
     request.setCharacterEncoding("utf-8");
     tempResult = request.getParameter("code");
     System.out.println(tempResult);
+    File f = new File("/home/fan/temp.sql");
+    try (PrintWriter pw = new PrintWriter(f)) {
+      pw.print(tempResult);
+    }catch(IOException e) {
+      e.printStackTrace();
+    }
     ParserDemo p = new ParserDemo(tempResult);
     this.result = p.parseSql();
     System.out.println(this.result);

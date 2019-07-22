@@ -7,25 +7,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bb616d6d-2d51-42c5-8de9-1088dff1d6ed" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/fan/gui/ParseTreeServlet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/artifacts/SQL_war.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/artifacts/SQL_war.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/artifacts/SQL_war_exploded.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/artifacts/SQL_war_exploded.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/fan/MainPageServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/fan/MainPageServlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/fan/parser/MySqlParserBaseListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/fan/parser/MySqlParserBaseListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/fan/parser/ParserDemo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/fan/parser/ParserDemo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/fan/parser/UnderlineListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/fan/parser/UnderlineListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/index.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/index.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/META-INF/SQL.kotlin_module" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/fan/MainPageServlet.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fan/MainPageServlet.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/fan/parser/MySqlParserBaseListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fan/parser/MySqlParserBaseListener.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/fan/parser/ParserDemo.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fan/parser/ParserDemo.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/fan/parser/UnderlineListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fan/parser/UnderlineListener.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/maven-archiver/pom.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/target/sql-editor.war" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/target/sql-editor/META-INF/MANIFEST.MF" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/target/sql-editor/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/sql-editor/WEB-INF/classes/META-INF/SQL.kotlin_module" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/target/sql-editor/WEB-INF/classes/com/fan/MainPageServlet.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/target/sql-editor/WEB-INF/classes/com/fan/parser/MySqlLexer.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/target/sql-editor/WEB-INF/classes/com/fan/parser/MySqlParser$AdministrationStatementContext.class" beforeDir="false" />
@@ -3886,13 +3880,13 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/pom.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="304">
-              <caret line="43" column="17" selection-start-line="43" selection-start-column="17" selection-end-line="43" selection-end-column="17" />
+            <state relative-caret-position="171">
+              <caret line="9" column="28" selection-start-line="9" selection-start-column="28" selection-end-line="9" selection-end-column="28" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/fan/parser/UnderlineListener.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="341">
@@ -3913,7 +3907,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/fan/parser/ParserDemo.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="208">
+            <state relative-caret-position="817">
               <caret line="43" column="45" selection-start-line="43" selection-start-column="45" selection-end-line="43" selection-end-column="45" />
             </state>
           </provider>
@@ -3922,8 +3916,20 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/webapp/index.jsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="379">
-              <caret line="85" column="41" selection-start-line="85" selection-start-column="41" selection-end-line="85" selection-end-column="41" />
+            <state relative-caret-position="285">
+              <caret line="99" column="61" selection-start-line="99" selection-start-column="61" selection-end-line="99" selection-end-column="61" />
+              <folding>
+                <element signature="n#style#0;n#div#0;n#article#0;n#html#0;n#!!top" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="418">
+              <caret line="22" column="27" selection-start-line="22" selection-start-column="27" selection-end-line="22" selection-end-column="27" />
             </state>
           </provider>
         </entry>
@@ -3931,26 +3937,26 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/fan/parser/MySqlParser.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="32243">
+            <state relative-caret-position="861">
               <caret line="1697" column="50" selection-start-line="1697" selection-start-column="50" selection-end-line="1697" selection-end-column="50" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/fan/MainPageServlet.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="209">
-              <caret line="23" column="42" selection-start-line="23" selection-start-column="42" selection-end-line="23" selection-end-column="42" />
+            <state relative-caret-position="152">
+              <caret line="32" column="5" selection-start-line="32" selection-start-column="5" selection-end-line="32" selection-end-column="5" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/fan/parser/MySqlParserVisitor.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/fan/gui/ParseTreeServlet.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-10193">
-              <caret line="114" column="5" selection-start-line="114" selection-start-column="5" selection-end-line="114" selection-end-column="5" />
+            <state relative-caret-position="380">
+              <caret line="20" column="71" selection-start-line="20" selection-start-column="71" selection-end-line="20" selection-end-column="71" />
             </state>
           </provider>
         </entry>
@@ -3983,10 +3989,15 @@
       <list>
         <option value="$PROJECT_DIR$/src/main/java/com/fan/parser/MySqlParserBaseListener.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/fan/parser/MySqlParser.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/fan/MainPageServlet.java" />
-        <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/src/main/java/com/fan/parser/ParserDemo.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/fan/parser/UnderlineListener.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/fan/shellUtil/JaveShellUtil.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/fan/ParseTreeServlet.java" />
+        <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/com/fan/MainPageServlet.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/fan/parser/ParseTreeServlet.java" />
+        <option value="$PROJECT_DIR$/pom.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/com/fan/gui/ParseTreeServlet.java" />
         <option value="$PROJECT_DIR$/src/main/webapp/index.jsp" />
       </list>
     </option>
@@ -4010,11 +4021,11 @@
       <expand>
         <path>
           <item name="" type="16c1761:MavenProjectsStructure$RootNode" />
-          <item name="sql-editor Maven Webapp" type="9519ce18:MavenProjectsStructure$ProjectNode" />
+          <item name="SQL" type="9519ce18:MavenProjectsStructure$ProjectNode" />
         </path>
         <path>
           <item name="" type="16c1761:MavenProjectsStructure$RootNode" />
-          <item name="sql-editor Maven Webapp" type="9519ce18:MavenProjectsStructure$ProjectNode" />
+          <item name="SQL" type="9519ce18:MavenProjectsStructure$ProjectNode" />
           <item name="Lifecycle" type="58874e2:MavenProjectsStructure$LifecycleNode" />
         </path>
       </expand>
@@ -4032,6 +4043,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -4039,12 +4052,45 @@
               <item name="SQL" type="b2602c69:ProjectViewProjectNode" />
               <item name="SQL" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="SQL" type="b2602c69:ProjectViewProjectNode" />
+              <item name="SQL" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="SQL" type="b2602c69:ProjectViewProjectNode" />
+              <item name="SQL" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="SQL" type="b2602c69:ProjectViewProjectNode" />
+              <item name="SQL" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="SQL" type="b2602c69:ProjectViewProjectNode" />
+              <item name="SQL" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="com" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="SQL" type="b2602c69:ProjectViewProjectNode" />
+              <item name="SQL" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="com" type="462c0819:PsiDirectoryNode" />
+              <item name="fan" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
-      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -4225,18 +4271,19 @@
       <updated>1563549376298</updated>
       <workItem from="1563549377838" duration="227000" />
       <workItem from="1563664899790" duration="7388000" />
-      <workItem from="1563743479121" duration="14583000" />
+      <workItem from="1563743479121" duration="17108000" />
+      <workItem from="1563824990309" duration="10330000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="22198000" />
+    <option name="totallyTimeSpent" value="35053000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="67" y="25" width="1853" height="1055" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.255119" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49758455" visible="true" weight="0.257886" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -4244,9 +4291,9 @@
       <window_info id="UI Designer" order="5" />
       <window_info id="Learn" order="6" />
       <window_info id="Favorites" order="7" side_tool="true" />
-      <window_info id="Web" order="8" side_tool="true" />
+      <window_info id="Web" order="8" sideWeight="0.5024155" side_tool="true" visible="true" weight="0.257886" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.32937366" />
+      <window_info anchor="bottom" id="Find" order="1" visible="true" weight="0.32937366" />
       <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.4997233" visible="true" weight="0.32937366" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39956802" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
@@ -4298,17 +4345,39 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/fan/shellUtil/JaveShellUtil.java" />
     <entry file="file://$PROJECT_DIR$/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="304">
-          <caret line="43" column="17" selection-start-line="43" selection-start-column="17" selection-end-line="43" selection-end-column="17" />
+        <state relative-caret-position="171">
+          <caret line="9" column="28" selection-start-line="9" selection-start-column="28" selection-end-line="9" selection-end-column="28" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/fan/parser/UnderlineListener.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/fan/gui/ParseTreeServlet.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="341">
-          <caret line="55" column="5" selection-start-line="55" selection-start-column="5" selection-end-line="55" selection-end-column="5" />
+        <state relative-caret-position="380">
+          <caret line="20" column="71" selection-start-line="20" selection-start-column="71" selection-end-line="20" selection-end-column="71" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/fan/parser/MySqlParser.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="861">
+          <caret line="1697" column="50" selection-start-line="1697" selection-start-column="50" selection-end-line="1697" selection-end-column="50" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="418">
+          <caret line="22" column="27" selection-start-line="22" selection-start-column="27" selection-end-line="22" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/fan/parser/ParserDemo.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="817">
+          <caret line="43" column="45" selection-start-line="43" selection-start-column="45" selection-end-line="43" selection-end-column="45" />
         </state>
       </provider>
     </entry>
@@ -4319,31 +4388,27 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/fan/parser/ParserDemo.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/fan/MainPageServlet.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="208">
-          <caret line="43" column="45" selection-start-line="43" selection-start-column="45" selection-end-line="43" selection-end-column="45" />
+        <state relative-caret-position="152">
+          <caret line="32" column="5" selection-start-line="32" selection-start-column="5" selection-end-line="32" selection-end-column="5" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/webapp/index.jsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="379">
-          <caret line="85" column="41" selection-start-line="85" selection-start-column="41" selection-end-line="85" selection-end-column="41" />
+        <state relative-caret-position="285">
+          <caret line="99" column="61" selection-start-line="99" selection-start-column="61" selection-end-line="99" selection-end-column="61" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#article#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/fan/parser/MySqlParser.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/fan/parser/UnderlineListener.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="32243">
-          <caret line="1697" column="50" selection-start-line="1697" selection-start-column="50" selection-end-line="1697" selection-end-column="50" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/fan/MainPageServlet.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="209">
-          <caret line="23" column="42" selection-start-line="23" selection-start-column="42" selection-end-line="23" selection-end-column="42" />
+        <state relative-caret-position="341">
+          <caret line="55" column="5" selection-start-line="55" selection-start-column="5" selection-end-line="55" selection-end-column="5" />
         </state>
       </provider>
     </entry>
