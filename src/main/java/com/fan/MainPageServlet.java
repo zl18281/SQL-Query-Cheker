@@ -13,30 +13,31 @@ import java.io.PrintWriter;
 @WebServlet(name = "MainPageServlet")
 public class MainPageServlet extends HttpServlet {
 
-    private String result = "";
+  private String result;
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+  protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        System.out.println(0);
+    System.out.println(0);
 
-        System.out.println(1);
-        String tempResult;
-        request.setCharacterEncoding("utf-8");
-        System.out.println(request.getParameter("code"));
-        tempResult = request.getParameter("code");
-        ParserDemo p = new ParserDemo(tempResult);
-        this.result = p.parseSql();
+    System.out.println(1);
+    String tempResult;
+    request.setCharacterEncoding("utf-8");
+    tempResult = request.getParameter("code");
+    System.out.println(tempResult);
+    ParserDemo p = new ParserDemo(tempResult);
+    this.result = p.parseSql();
+    System.out.println(this.result);
+
+  }
+
+  protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+    response.setContentType("text/html");//setting the content type
+    //get the stream to write the data
+    try (PrintWriter pw = response.getWriter()) {
+      //writing html in the stream
+      pw.print(this.result);
 
     }
-
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-        response.setContentType("text/html");//setting the content type
-        //get the stream to write the data
-        try (PrintWriter pw = response.getWriter()) {
-            //writing html in the stream
-            pw.print(this.result);
-
-        }
-    }
+  }
 }

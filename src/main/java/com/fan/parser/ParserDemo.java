@@ -6,7 +6,6 @@ import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
 
 import java.io.File;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
@@ -32,23 +31,22 @@ public class ParserDemo {
     parser.root();
     System.out.println("right after parsing");
 
-    File f = new File("/home/fan/error.txt");
+    File f = new File("/home/fan/error.json");
     System.out.println("file opened");
+    StringBuilder errorInfo = new StringBuilder();
     try (Scanner in = new Scanner(f)) {
-      String errorInfo = "";
       while (in.hasNext()) {
-        errorInfo += (in.next() + " ");
+        errorInfo.append(in.next());
       }
-      try (FileWriter fw = new FileWriter(f)) {
-        fw.write("");
-      } catch (IOException ex) {
-        System.err.println("file not found !");
-      }
-      return errorInfo;
     } catch (IOException e) {
-      System.err.println("file not found !");
+      System.err.println("file not found ** !");
     }
-    return "";
+    try (FileWriter fw = new FileWriter(f)) {
+      fw.write("");
+    } catch (IOException ex) {
+      System.err.println("file not found * !");
+    }
+    return errorInfo.toString();
   }
 
   public static void main(String[] args) {
