@@ -34,8 +34,7 @@ public class UnderlineListener extends BaseErrorListener {
       System.out.println(error[i]);
     }
 
-
-    File errorInfo = new File("/home/fan/error.json");
+    File errorInfo = new File("../webapps/SQL/WEB-INF/resources/error/error.json");
 
     try (FileWriter fw = new FileWriter(errorInfo)) {
       fw.write("");

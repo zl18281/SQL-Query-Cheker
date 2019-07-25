@@ -31,7 +31,7 @@ public class ParserDemo {
     parser.root();
     System.out.println("right after parsing");
 
-    File f = new File("/home/fan/error.json");
+    File f = new File("../webapps/SQL/WEB-INF/resources/error/error.json");
     System.out.println("file opened");
     StringBuilder errorInfo = new StringBuilder();
     try (Scanner in = new Scanner(f)) {

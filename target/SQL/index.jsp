@@ -45,14 +45,13 @@
   <button onclick="compileTwo()">Packrat</button>
   <button onclick="tree()">Tree</button>
   <button onclick="save()">Save</button>
+  <a href="syntax.html">See Syntax</a>
   <br><br><br>
-  <div style="width: 300px; height: 500px">
+  <div style="width: 300px;height: auto">
     <h2>Result</h2>
     <p id="result"></p>
   </div>
-  <img src="img/s">
-  <img id="tree" src="img/tree.ps">
-
+  <img id="tree" style="height: auto; width:auto; "src="img/tree.jpg"/>
 </article>
 <script>
   var editor = CodeMirror.fromTextArea(document.getElementById("code"), {

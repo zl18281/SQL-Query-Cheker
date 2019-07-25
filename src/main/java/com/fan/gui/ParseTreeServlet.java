@@ -17,13 +17,19 @@ public class ParseTreeServlet extends HttpServlet {
 
   protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     System.out.println("inside tree servlet");
-    String path = System.getProperty("user.dir");
-    String[] args = {"MySql", "root", "-gui", "-ps", "/home/fan/tree.ps", "/home/fan/temp.sql"};
+    String[] args = {"MySql", "root", "-gui", "-ps", "../webapps/SQL/WEB-INF/resources/img/tree.ps",
+      "../webapps/SQL/WEB-INF/resources/sql/temp.sql"};
     try {
       TestRig.main(args);
     } catch (Exception e) {
       e.printStackTrace();
     }
 
+    try {
+      System.out.println("convert");
+      PSConvertor.convert();
+    }catch (Exception e) {
+      e.printStackTrace();
+    }
   }
 }
