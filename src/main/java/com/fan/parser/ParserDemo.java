@@ -41,10 +41,10 @@ public class ParserDemo {
     } catch (IOException e) {
       System.err.println("file not found ** !");
     }
-    try (FileWriter fw = new FileWriter(f)) {
+    try (FileWriter fw = new FileWriter(f)){
       fw.write("");
-    } catch (IOException ex) {
-      System.err.println("file not found * !");
+    }catch (Exception ex) {
+      ex.printStackTrace();
     }
     return errorInfo.toString();
   }

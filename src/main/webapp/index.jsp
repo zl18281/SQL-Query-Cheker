@@ -49,9 +49,11 @@
   <br><br><br>
   <div style="width: 300px;height: auto">
     <h2>Result</h2>
-    <p id="result"></p>
+    <pre id="result"></pre>
   </div>
+  <!--
   <img id="tree" style="height: auto; width:auto; "src="img/tree.jpg"/>
+  -->
 </article>
 <script>
   var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
@@ -92,14 +94,44 @@
           document.getElementById('result').innerHTML = '';
         } else {
           var errorInfo = JSON.parse(data);
-          document.getElementById('result').innerHTML =
-            'stack: ' + '<br>' + errorInfo['stack'] + '<br><br>' +
-            'line: ' + '<br>' + errorInfo['line'] + '<br><br>' +
-            'charPositionInLine' + '<br>' + errorInfo['charPositionInLine'] + '<br><br>' +
-            'offendingSymbol' + '<br>' + errorInfo['offendingSymbol'] + '<br><br>' +
-            'msg' + '<br>' + errorInfo['msg'] + '<br><br>';
-        }
+          console.log(errorInfo);
 
+          var space = '';
+          var numOfSpaces = errorInfo['numOfSpaces'];
+          for(let i = 0; i < numOfSpaces; i++) {
+            space += ' ';
+          }
+          var arrow ='';
+          var numOfArows = errorInfo['numOfArrows'];
+          for(let j = 0; j < numOfArows; j++) {
+            arrow += '^';
+          }
+          var errorInformation = '';
+
+          let i = 0;
+          while(errorInfo['msg'][i] != null) {
+            errorInformation += errorInfo['msg'][i] + ' ';
+            i++;
+          }
+
+          var errorLine = '';
+          let j = 0;
+          while(errorInfo['errorLine'][j] != null) {
+            errorLine += errorInfo['errorLine'][j] + ' ';
+            j++;
+          }
+
+          console.log(errorInfo['errorLine']);
+          document.getElementById('result').innerHTML =
+            'Stack: ' + '<br>' + errorInfo['stack'] + '<br><br>' +
+            'Line: ' + '<br>' + errorInfo['line'] + '<br><br>' +
+            'Char Position In Line' + '<br>' + errorInfo['charPositionInLine'] + '<br><br>' +
+            'Offending Symbol' + '<br>' + errorInfo['offendingSymbol'] + '<br><br>' +
+            'Error Message' + '<br>' + errorInformation + '<br><br>' +
+            'Error Line' + '<br>' + errorLine + '<br>' +
+            space + arrow;
+
+        }
       }
     });
   }
@@ -118,13 +150,10 @@
     const url = '/SQL/tree';
     Http.open("GET", url);
     Http.send();
-
     Http.onreadystatechange = (e) => {
       console.log(Http.responseText)
     }
-
   }
-
 
 </script>
 

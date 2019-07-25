@@ -16,7 +16,7 @@ public class PSConvertor {
 
   public static void convert() throws Exception {
 
-    execute("gs -sDEVICE=jpeg -g6400x4800 -r300 -sOutputFile=../webapps/SQL/img/tree.jpg ../webapps/SQL/WEB-INF/resources/img/tree.ps");
+    execute("gs -dSAFER -dBATCH -dNOPAUSE -dUseCropBox -sDEVICE=jpeg -sOutputFile=../webapps/SQL/img/tree.jpg ../webapps/SQL/WEB-INF/resources/img/tree.ps");
     System.out.println("After convert");
 
   }
