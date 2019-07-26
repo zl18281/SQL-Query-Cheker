@@ -1,7 +1,10 @@
 package com.fan.parser;
 
-import org.antlr.v4.runtime.*;
-import org.antlr.v4.runtime.tree.*;
+import org.antlr.v4.runtime.ANTLRErrorListener;
+import org.antlr.v4.runtime.CharStream;
+import org.antlr.v4.runtime.CharStreams;
+import org.antlr.v4.runtime.CommonTokenStream;
+import org.antlr.v4.runtime.tree.ParseTree;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -20,7 +23,8 @@ public class ParserDemo {
   public String parseSql() {
 
     ANTLRErrorListener error = new UnderlineListener();
-    CharStream input = CharStreams.fromString(this.code);
+
+    CharStream input = CharStreams.fromString(this.code.toUpperCase());
     MySqlLexer lexer = new MySqlLexer(input);
     CommonTokenStream tokens = new CommonTokenStream(lexer);
     MySqlParser parser = new MySqlParser(tokens);

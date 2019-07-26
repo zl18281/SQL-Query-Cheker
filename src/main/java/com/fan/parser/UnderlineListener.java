@@ -84,13 +84,15 @@ public class UnderlineListener extends BaseErrorListener {
       while(t2.hasMoreTokens()) {
         errorLineText.add(new StringBuilder(t2.nextToken()));
       }
-      String errorLineInJson = "{";
+      StringBuilder errorLineInJson = new StringBuilder("{");
       for(int i = 0; i < errorLineText.size() - 1; i++) {
-        errorLineInJson += ("\"" + i + "\":" + "\"" + errorLineText.get(i).toString() + "\",");
+        String temp = "\"" + i + "\":" + "\"" + errorLineText.get(i).toString() + "\",";
+        errorLineInJson.append(temp);
       }
-      errorLineInJson += "\"" + (errorLineText.size() - 1) + "\":" + "\"" + errorLineText.get(errorLineText.size() - 1) + "\"}";
+      String temp = "\"" + (errorLineText.size() - 1) + "\":" + "\"" + errorLineText.get(errorLineText.size() - 1) + "\"}";
+      errorLineInJson.append(temp);
 
-      p.println("\"errorLine\":" + errorLineInJson + ",");
+      p.println("\"errorLine\":" + errorLineInJson.toString() + ",");
       System.err.println(errorLine);
       for (int i = 0; i < charPositionInLine; i++) System.err.print(" ");
       p.println("\"numOfSpaces\":" + "\"" + (charPositionInLine) + "\",");
