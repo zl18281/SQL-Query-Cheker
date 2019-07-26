@@ -1,7 +1,6 @@
+package com.fan.parser;
+
 // Generated from MySqlParser.g4 by ANTLR 4.7.2
-
-   package com.fan.parser;
-
 import org.antlr.v4.runtime.tree.ParseTreeVisitor;
 
 /**

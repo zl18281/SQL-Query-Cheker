@@ -1,7 +1,6 @@
+package com.fan.parser;
+
 // Generated from MySqlParser.g4 by ANTLR 4.7.2
-
-   package com.fan.parser;
-
 import org.antlr.v4.runtime.atn.*;
 import org.antlr.v4.runtime.dfa.DFA;
 import org.antlr.v4.runtime.*;

@@ -49,7 +49,14 @@
   <br><br><br>
   <div style="width: 300px;height: auto">
     <h2>Result</h2>
-    <pre id="result"></pre>
+    <pre style="word-wrap:break-word;" id="result"></pre>
+  </div>
+  <div style="width: 300px;height: auto;">
+    <p style="word-wrap:break-word;" id="error"></p>
+  </div>
+  <div style="width: 300px;height: auto;">
+    <h2>Lisp Tree</h2>
+    <p style="word-wrap:break-word;" id="tree"></p>
   </div>
   <!--
   <img id="tree" style="height: auto; width:auto; "src="img/tree.jpg"/>
@@ -93,31 +100,31 @@
         if (data == '' || data == null) {
           document.getElementById('result').innerHTML = '';
         } else {
-          var errorInfo = JSON.parse(data);
+          let errorInfo = JSON.parse(data);
           console.log(errorInfo);
 
-          var space = '';
-          var numOfSpaces = errorInfo['numOfSpaces'];
+          let space = '';
+          let numOfSpaces = errorInfo['numOfSpaces'];
           for(let i = 0; i < numOfSpaces; i++) {
-            space += ' ';
+            space += '&nbsp';
           }
-          var arrow ='';
-          var numOfArows = errorInfo['numOfArrows'];
+          let arrow ='';
+          let numOfArows = errorInfo['numOfArrows'];
           for(let j = 0; j < numOfArows; j++) {
             arrow += '^';
           }
-          var errorInformation = '';
+          let errorInformation = '';
 
           let i = 0;
           while(errorInfo['msg'][i] != null) {
-            errorInformation += errorInfo['msg'][i] + ' ';
+            errorInformation += (errorInfo['msg'][i] + '&nbsp');
             i++;
           }
 
-          var errorLine = '';
+          let errorLine = '';
           let j = 0;
           while(errorInfo['errorLine'][j] != null) {
-            errorLine += errorInfo['errorLine'][j] + ' ';
+            errorLine += errorInfo['errorLine'][j] + '&nbsp';
             j++;
           }
 
@@ -127,9 +134,9 @@
             'Line: ' + '<br>' + errorInfo['line'] + '<br><br>' +
             'Char Position In Line' + '<br>' + errorInfo['charPositionInLine'] + '<br><br>' +
             'Offending Symbol' + '<br>' + errorInfo['offendingSymbol'] + '<br><br>' +
-            'Error Message' + '<br>' + errorInformation + '<br><br>' +
             'Error Line' + '<br>' + errorLine + '<br>' +
             space + arrow;
+          document.getElementById('error').innerHTML = 'Error Message' + '<br>' + errorInformation + '<br><br>';
 
         }
       }
@@ -146,13 +153,17 @@
 
 <script>
   function tree() {
-    const Http = new XMLHttpRequest();
-    const url = '/SQL/tree';
-    Http.open("GET", url);
-    Http.send();
-    Http.onreadystatechange = (e) => {
-      console.log(Http.responseText)
-    }
+    $.ajax({
+      type: "GET",
+      url: "/SQL/tree",
+      success: function (data) {
+        console.log(data);
+        document.getElementById('tree').innerText = data;
+      },
+      error: function () {
+        alert('error');
+      }
+    });
   }
 
 </script>
