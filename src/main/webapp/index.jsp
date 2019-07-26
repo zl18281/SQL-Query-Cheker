@@ -44,7 +44,11 @@
   <button onclick="compileOne()">ANTLR</button>
   <button onclick="compileTwo()">Packrat</button>
   <button onclick="tree()">Tree</button>
-  <button onclick="save()">Save</button>
+  <div>
+    <input id="fileName" type="text" value="filename" onfocus="value=''"/>
+    <button onclick="save()">Save</button>
+  </div>
+
   <a href="syntax.html">See Syntax</a>
   <br><br><br>
   <div style="width: 300px;height: auto">
@@ -76,8 +80,18 @@
     }
   });
 </script>
+
 <script src="js/antlr.js"></script>
 <script src="js/tree.js"></script>
 <script src="js/packrat.js"></script>
+<script src="js/save.js"></script>
+<script>function save() {
+  let file = new File([editor.getValue()],
+    document.getElementById("fileName").value,
+    {type: "text/plain;charset=utf-8"});
+  saveAs(file);
+}
+</script>
+
 
 </html>

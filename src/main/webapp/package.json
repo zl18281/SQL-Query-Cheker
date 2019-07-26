@@ -43,5 +43,6 @@
     "directories": {},
     "dependencies": {},
     "devDependencies": {}
-  }
+  },
+  "dependencies": {}
 }
