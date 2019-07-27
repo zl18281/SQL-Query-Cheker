@@ -24,6 +24,7 @@
   <script src="addon/display/fullscreen.js"></script>
   <script src="addon/hint/show-hint.js"></script>
   <script src="addon/hint/sql-hint.js"></script>
+  <script src="js/getDB.js"></script>
 </head>
 <div id=nav>
   <a href="https://codemirror.net"><h1>CodeMirror</h1><img id=logo src="doc/logo.png"></a>
@@ -38,12 +39,21 @@
   </ul>
 </div>
 
-<article id="core">
+<article id="core" style="width: auto">
   <h2>Editor</h2>
   <form><textarea id="code" name="code" rows="5"></textarea></form>
   <button onclick="compileOne()">ANTLR</button>
   <button onclick="compileTwo()">Packrat</button>
   <button onclick="tree()">Tree</button>
+  <button onclick="getDB()">Init</button>
+  <br>
+  <b>Databases</b>
+  <select id="database">
+  </select>
+  <br>
+  <b>Tables</b>
+  <select id="table">
+  </select>
   <div>
     <input id="fileName" type="text" value="filename" onfocus="value=''"/>
     <button onclick="save()">Save</button>
@@ -92,6 +102,5 @@
   saveAs(file);
 }
 </script>
-
 
 </html>

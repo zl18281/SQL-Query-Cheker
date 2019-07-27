@@ -24,4 +24,14 @@
     <url-pattern>/tree</url-pattern>
   </servlet-mapping>
 
+  <servlet>
+    <servlet-name>getDBServlet</servlet-name>
+    <servlet-class>com.fan.db.getDBServlet</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>getDBServlet</servlet-name>
+    <url-pattern>/getDB</url-pattern>
+  </servlet-mapping>
+
 </web-app>
