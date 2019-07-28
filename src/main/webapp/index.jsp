@@ -17,6 +17,7 @@
   <link rel="stylesheet" href="addon/display/fullscreen.css">
   <link rel="stylesheet" href="theme/night.css">
   <link rel="stylesheet" href="addon/hint/show-hint.css">
+  <link rel="stylesheet" href="css/toolTip.css">
 
   <script src="js/jquery.js"></script>
   <script src="lib/codemirror.js"></script>
@@ -25,6 +26,9 @@
   <script src="addon/hint/show-hint.js"></script>
   <script src="addon/hint/sql-hint.js"></script>
   <script src="js/getDB.js"></script>
+  <script src="js/getTable.js"></script>
+  <script src="js/cursor.js"></script>
+
 </head>
 <div id=nav>
   <a href="https://codemirror.net"><h1>CodeMirror</h1><img id=logo src="doc/logo.png"></a>
@@ -41,11 +45,19 @@
 
 <article id="core" style="width: auto">
   <h2>Editor</h2>
-  <form><textarea id="code" name="code" rows="5"></textarea></form>
+  <div>
+  <textarea id="code" class="textBox" name="code" rows="5"></textarea>
+    <div class="tooltip" style="float: right" onmouseenter="insertCodeHint();">Code Hint (Hover)
+      <div id="hint" class="tooltiptext">Tooltip text</div>
+    </div>
+  </div>
   <button onclick="compileOne()">ANTLR</button>
   <button onclick="compileTwo()">Packrat</button>
   <button onclick="tree()">Tree</button>
-  <button onclick="getDB()">Init</button>
+  <a href="syntax.html">See Syntax</a>
+  <br><br>
+  <button onclick="getDB();">Init Database</button>
+  <button onclick="getTable();">Init Table</button>
   <br>
   <b>Databases</b>
   <select id="database">
@@ -54,12 +66,12 @@
   <b>Tables</b>
   <select id="table">
   </select>
+  <br><br>
   <div>
     <input id="fileName" type="text" value="filename" onfocus="value=''"/>
     <button onclick="save()">Save</button>
   </div>
 
-  <a href="syntax.html">See Syntax</a>
   <br><br><br>
   <div style="width: 300px;height: auto">
     <h2>Result</h2>
@@ -95,6 +107,7 @@
 <script src="js/tree.js"></script>
 <script src="js/packrat.js"></script>
 <script src="js/save.js"></script>
+<script src="js/codeHint.js"></script>
 <script>function save() {
   let file = new File([editor.getValue()],
     document.getElementById("fileName").value,

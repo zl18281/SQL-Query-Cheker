@@ -34,4 +34,24 @@
     <url-pattern>/getDB</url-pattern>
   </servlet-mapping>
 
+  <servlet>
+    <servlet-name>getTableServlet</servlet-name>
+    <servlet-class>com.fan.db.getTableServlet</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>getTableServlet</servlet-name>
+    <url-pattern>/getTable</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>getColumnServlet</servlet-name>
+    <servlet-class>com.fan.db.getColumnServlet</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>getColumnServlet</servlet-name>
+    <url-pattern>/getColumn</url-pattern>
+  </servlet-mapping>
+
 </web-app>
