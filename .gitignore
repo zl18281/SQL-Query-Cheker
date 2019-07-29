@@ -1,4 +1,9 @@
 ./src/main/webapp/node_modules
 ./src/main/webapp/demo
 ./target
+./.idea
+./.editorconfig
+./.gitattributes
+./.npmignore
+./.travis.yml
 
