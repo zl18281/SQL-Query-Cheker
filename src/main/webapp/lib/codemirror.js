@@ -1188,7 +1188,7 @@
     return type
   }
 
-  // Run the given mode's parser over a line, calling f for each token.
+  // Run the given mode's ANTLR over a line, calling f for each token.
   function runMode(cm, text, mode, context, f, lineClasses, forceToEnd) {
     var flattenSpans = mode.flattenSpans;
     if (flattenSpans == null) { flattenSpans = cm.options.flattenSpans; }
@@ -8237,7 +8237,7 @@
         }
       }),
 
-      // Fetch the parser token for a given character. Useful for hacks
+      // Fetch the ANTLR token for a given character. Useful for hacks
       // that want to inspect the mode state (say, for completion).
       getTokenAt: function(pos, precise) {
         return takeToken(this, pos, precise)

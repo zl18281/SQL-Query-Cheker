@@ -1,14 +1,17 @@
-package com.fan.parser;
+package com.fan.ANTLR.core;
 
+import org.antlr.v4.gui.TreeViewer;
 import org.antlr.v4.runtime.ANTLRErrorListener;
 import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.tree.ParseTree;
+import org.antlr.v4.runtime.tree.Tree;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
+import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class ParserDemo {
@@ -31,8 +34,39 @@ public class ParserDemo {
     parser.removeErrorListeners();
     parser.addErrorListener(error);
     ParseTree tree = parser.root();
-    try(FileWriter fwTree = new FileWriter("../webapps/SQL/WEB-INF/resources/img/tree.txt")){
 
+    //
+    System.out.println("1");
+    List<String> rules = new ArrayList<>();
+    System.out.println("2");
+    String[] rulesNames = parser.makeRuleNames();
+    for(int i = 0; i < rulesNames.length; i++) {
+      rules.add(rulesNames[i]);
+    }
+    System.out.println("3");
+    TreeViewer tv = new TreeViewer(rules, (Tree)tree);
+    System.out.println("4");
+
+
+    try {
+      File svgFile = new File("../webapps/SQL/img/tree.svg");
+      BufferedWriter writer = new BufferedWriter(new FileWriter(svgFile));
+      writer.write("<svg width=\"" + tv.getSize().getWidth() * 1.1 + "\" height=\"" +
+        tv.getSize().getHeight() * 1.1 + "\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\">");
+      Method m = tv.getClass().getDeclaredMethod("paintSVG", Writer.class);
+      m.setAccessible(true);
+      m.invoke(tv, writer);
+      writer.write("</svg>");
+      writer.flush();
+      writer.close();
+    }catch(Exception e) {
+      e.printStackTrace();
+    }
+
+
+
+    //
+    try(FileWriter fwTree = new FileWriter("../webapps/SQL/WEB-INF/resources/img/tree.txt")){
       fwTree.write(tree.toStringTree(parser));
     }catch(IOException e) {
       e.printStackTrace();

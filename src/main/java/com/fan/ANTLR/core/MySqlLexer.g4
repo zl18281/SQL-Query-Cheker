@@ -25,6 +25,10 @@ THE SOFTWARE.
 
 lexer grammar MySqlLexer;
 
+@header {
+   package com.fan.ANTLR;
+} 
+
 channels { MYSQLCOMMENT, ERRORCHANNEL }
 
 // SKIP

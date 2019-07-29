@@ -1,4 +1,4 @@
-package com.fan.db;
+package com.fan.db.core;
 
 import org.json.JSONObject;
 
@@ -18,7 +18,7 @@ public class Column {
     this.table = table;
   }
 
-  JSONObject getColumn () {
+  public JSONObject getColumn () {
     try {
       Class.forName("org.mariadb.jdbc.Driver");
       Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/" +

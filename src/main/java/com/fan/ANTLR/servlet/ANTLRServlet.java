@@ -1,6 +1,6 @@
-package com.fan;
+package com.fan.ANTLR.servlet;
 
-import com.fan.parser.ParserDemo;
+import com.fan.ANTLR.core.ParserDemo;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,8 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 
-@WebServlet(name = "MainPageServlet")
-public class MainPageServlet extends HttpServlet {
+@WebServlet(name = "ANTLRServlet")
+public class ANTLRServlet extends HttpServlet {
 
   private String result;
 

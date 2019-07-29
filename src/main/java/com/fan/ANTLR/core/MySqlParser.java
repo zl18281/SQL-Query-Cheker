@@ -1,4 +1,4 @@
-package com.fan.parser;
+package com.fan.ANTLR.core;
 
 // Generated from MySqlParser.g4 by ANTLR 4.7.2
 import org.antlr.v4.runtime.atn.*;
@@ -307,7 +307,7 @@ public class MySqlParser extends Parser {
 		RULE_bitOperator = 301, RULE_mathOperator = 302, RULE_charsetNameBase = 303, 
 		RULE_transactionLevelBase = 304, RULE_privilegesBase = 305, RULE_intervalTypeBase = 306, 
 		RULE_dataTypeBase = 307, RULE_keywordsCanBeId = 308, RULE_functionNameBase = 309;
-	private static String[] makeRuleNames() {
+	public static String[] makeRuleNames() {
 		return new String[] {
 			"root", "sqlStatements", "sqlStatement", "emptyStatement", "ddlStatement", 
 			"dmlStatement", "transactionStatement", "replicationStatement", "preparedStatement", 

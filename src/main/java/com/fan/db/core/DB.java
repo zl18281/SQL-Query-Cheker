@@ -1,4 +1,4 @@
-package com.fan.db;
+package com.fan.db.core;
 
 import org.json.JSONObject;
 
@@ -8,23 +8,17 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-public class Table {
-  ArrayList<StringBuilder> tb = new ArrayList<>();
-  private String database;
+public class DB {
+  ArrayList<StringBuilder> db = new ArrayList<>();
 
-  public Table(String database) {
-    this.database = database;
-  }
-
-  JSONObject getTable () {
+  public JSONObject getDB () {
     try {
       Class.forName("org.mariadb.jdbc.Driver");
-      Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/" +
-        this.database , "student", "");
+      Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/uni" , "student", "");
       Statement statement = connection.createStatement();
-      ResultSet resultSet = statement.executeQuery("SHOW TABLES;");
+      ResultSet resultSet = statement.executeQuery("SHOW DATABASES;");
       while (resultSet.next()){
-        this.tb.add(new StringBuilder(resultSet.getString(1)));
+        this.db.add(new StringBuilder(resultSet.getString(1)));
       }
       connection.close();
     }catch(Exception e) {
@@ -32,8 +26,8 @@ public class Table {
     }
     JSONObject j = new JSONObject();
     try {
-      for(int i = 1; i <= tb.size(); i++) {
-        j.put(Integer.toString(i), tb.get(i - 1).toString());
+      for(int i = 1; i <= db.size(); i++) {
+        j.put(Integer.toString(i), db.get(i - 1).toString());
       }
       System.out.println(j.toString());
     } catch (Exception e) {
@@ -41,4 +35,5 @@ public class Table {
     }
     return j;
   }
+
 }

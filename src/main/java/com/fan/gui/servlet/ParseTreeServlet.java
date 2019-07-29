@@ -1,4 +1,4 @@
-package com.fan.gui;
+package com.fan.gui.servlet;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

@@ -5,18 +5,18 @@
          version="4.0">
 
   <servlet>
-    <servlet-name>MainPageServlet</servlet-name>
-    <servlet-class>com.fan.MainPageServlet</servlet-class>
+    <servlet-name>ANTLRServlet</servlet-name>
+    <servlet-class>com.fan.ANTLR.servlet.ANTLRServlet</servlet-class>
   </servlet>
 
   <servlet-mapping>
-    <servlet-name>MainPageServlet</servlet-name>
+    <servlet-name>ANTLRServlet</servlet-name>
     <url-pattern>/sqlEditor</url-pattern>
   </servlet-mapping>
 
   <servlet>
     <servlet-name>ParseTreeServlet</servlet-name>
-    <servlet-class>com.fan.gui.ParseTreeServlet</servlet-class>
+    <servlet-class>com.fan.gui.servlet.ParseTreeServlet</servlet-class>
   </servlet>
 
   <servlet-mapping>
@@ -26,7 +26,7 @@
 
   <servlet>
     <servlet-name>getDBServlet</servlet-name>
-    <servlet-class>com.fan.db.getDBServlet</servlet-class>
+    <servlet-class>com.fan.db.servlet.getDBServlet</servlet-class>
   </servlet>
 
   <servlet-mapping>
@@ -36,7 +36,7 @@
 
   <servlet>
     <servlet-name>getTableServlet</servlet-name>
-    <servlet-class>com.fan.db.getTableServlet</servlet-class>
+    <servlet-class>com.fan.db.servlet.getTableServlet</servlet-class>
   </servlet>
 
   <servlet-mapping>
@@ -46,7 +46,7 @@
 
   <servlet>
     <servlet-name>getColumnServlet</servlet-name>
-    <servlet-class>com.fan.db.getColumnServlet</servlet-class>
+    <servlet-class>com.fan.db.servlet.getColumnServlet</servlet-class>
   </servlet>
 
   <servlet-mapping>

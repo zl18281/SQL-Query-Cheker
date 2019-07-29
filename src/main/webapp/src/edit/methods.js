@@ -115,7 +115,7 @@ export default function(CodeMirror) {
       }
     }),
 
-    // Fetch the parser token for a given character. Useful for hacks
+    // Fetch the ANTLR token for a given character. Useful for hacks
     // that want to inspect the mode state (say, for completion).
     getTokenAt: function(pos, precise) {
       return takeToken(this, pos, precise)

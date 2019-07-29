@@ -1,4 +1,6 @@
-package com.fan.db;
+package com.fan.db.servlet;
+
+import com.fan.db.core.Column;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

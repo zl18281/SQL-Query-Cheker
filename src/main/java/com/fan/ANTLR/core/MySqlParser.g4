@@ -26,7 +26,7 @@ THE SOFTWARE.
 parser grammar MySqlParser;
 
 @header {
-   package com.fan.parser;
+   package com.fan.ANTLR;
 }
 
 options { tokenVocab=MySqlLexer; }

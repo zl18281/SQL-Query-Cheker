@@ -1,4 +1,4 @@
-package com.fan.parser;
+package com.fan.ANTLR.core;
 
 import org.antlr.v4.runtime.*;
 
