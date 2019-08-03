@@ -2,10 +2,7 @@ package com.fan.ANTLR.core;
 
 import org.antlr.v4.runtime.*;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.*;
 import java.util.Collections;
 import java.util.*;
 
@@ -109,8 +106,17 @@ public class UnderlineListener extends BaseErrorListener {
       System.err.println("file not found *** !");
     }
 
-  }
 
+    //for research only
+    File f = new File("/home/fan/error.json");
+    try(Scanner fr = new Scanner(errorInfo); FileWriter fw = new FileWriter(f)) {
+      while(fr.hasNext()) {
+        fw.write(fr.next());
+      }
+    }catch(Exception ex) {
+      e.printStackTrace();
+    }
+  }
 }
 
 

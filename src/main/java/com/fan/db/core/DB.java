@@ -11,10 +11,18 @@ import java.util.ArrayList;
 public class DB {
   ArrayList<StringBuilder> db = new ArrayList<>();
 
+  private String username = null;
+  private String password = null;
+
+  public DB (String username, String password) {
+    this.username = username;
+    this.password = password;
+  }
+
   public JSONObject getDB () {
     try {
       Class.forName("org.mariadb.jdbc.Driver");
-      Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/uni" , "student", "");
+      Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/uni" , username, password);
       Statement statement = connection.createStatement();
       ResultSet resultSet = statement.executeQuery("SHOW DATABASES;");
       while (resultSet.next()){

@@ -1,4 +1,4 @@
-<%--
+<%@ page import="java.net.URLDecoder" %><%--
   Created by IntelliJ IDEA.
   User: fan
   Date: 19/07/19
@@ -17,7 +17,6 @@
   <link rel="stylesheet" href="addon/display/fullscreen.css">
   <link rel="stylesheet" href="theme/night.css">
   <link rel="stylesheet" href="addon/hint/show-hint.css">
-  <link rel="stylesheet" href="css/toolTip.css">
 
   <script src="js/jquery.js"></script>
   <script src="lib/codemirror.js"></script>
@@ -28,6 +27,7 @@
   <script src="js/getDB.js"></script>
   <script src="js/getTable.js"></script>
   <script src="js/cursor.js"></script>
+  <link rel="stylesheet" href="css/toolTip.css">
 
 </head>
 <div id=nav>
@@ -37,6 +37,7 @@
     <li><a href="index.jsp">Home</a>
     <li><a href="doc/manual.html">Manual</a>
     <li><a href="https://github.com/codemirror/codemirror">Code</a>
+    <li><a href="" data-toggle="modal" data-target="#login-modal">LOGIN</a></li>
   </ul>
   <ul>
     <li><a class=active href="#">MySQL Editor</a>
@@ -51,6 +52,24 @@
       <div id="hint" class="tooltiptext">Tooltip text</div>
     </div>
   </div>
+  <div>
+    <form id="login" action="/SQL/session" method="post">
+    <br>Login<br>
+    username: <input id="username" type="text" name="username" value="username" onfocus="value=''"/><br>
+      password: <input id="password" type="password" name="password" value=""/><br>
+      <input type="submit"><br>
+      </form>
+    <%
+      String username=null;
+      Cookie[] cookieArr = request.getCookies();
+      for(Cookie c:cookieArr){
+        if(c.getName().equals("username")){
+          username = URLDecoder.decode(c.getValue(), "utf-8");
+        }
+      }
+      out.print("User Name: " + username);
+    %>
+  </div><br>
   <button onclick="compileOne()">ANTLR</button>
   <button onclick="compileTwo()">Packrat</button>
   <button onclick="tree()">Tree</button>
@@ -76,9 +95,7 @@
   <div style="width: 300px;height: auto">
     <h2>Result</h2>
     <pre style="word-wrap:break-word;" id="result"></pre>
-  </div>
-  <div style="width: 300px;height: auto;">
-    <p style="word-wrap:break-word;" id="error"></p>
+    <pre style="word-wrap:break-word;" id="error"></pre>
   </div>
   <div style="width: 300px;height: auto;">
     <h2>Lisp Tree</h2>
@@ -88,6 +105,7 @@
   <img id="tree" style="height: auto; width:auto; "src="img/tree.jpg"/>
   -->
 </article>
+
 <script>
   var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
     lineNumbers: true,

@@ -1,6 +1,6 @@
 package com.fan.ANTLR.core;
 
-// Generated from MySqlParser.g4 by ANTLR 4.7.2
+// Generated from MySqlParser.java.g4 by ANTLR 4.7.2
 import org.antlr.v4.runtime.tree.AbstractParseTreeVisitor;
 
 /**

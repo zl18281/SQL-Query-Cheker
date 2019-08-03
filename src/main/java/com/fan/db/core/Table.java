@@ -11,16 +11,20 @@ import java.util.ArrayList;
 public class Table {
   ArrayList<StringBuilder> tb = new ArrayList<>();
   private String database;
+  private String username;
+  private String password;
 
-  public Table(String database) {
+  public Table(String database, String username, String password) {
     this.database = database;
+    this.username = username;
+    this.password = password;
   }
 
   public JSONObject getTable () {
     try {
       Class.forName("org.mariadb.jdbc.Driver");
       Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/" +
-        this.database , "student", "");
+        this.database , username, password);
       Statement statement = connection.createStatement();
       ResultSet resultSet = statement.executeQuery("SHOW TABLES;");
       while (resultSet.next()){

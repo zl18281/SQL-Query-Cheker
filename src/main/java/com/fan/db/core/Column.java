@@ -12,17 +12,21 @@ public class Column {
   ArrayList<StringBuilder> col = new ArrayList<>();
   private String database;
   private String table;
+  private String username;
+  private String password;
 
-  public Column(String database, String table) {
+  public Column(String database, String table, String username, String password) {
     this.database = database;
     this.table = table;
+    this.username = username;
+    this.password = password;
   }
 
   public JSONObject getColumn () {
     try {
       Class.forName("org.mariadb.jdbc.Driver");
       Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/" +
-        this.database , "student", "");
+        this.database , username, password);
       Statement statement = connection.createStatement();
       ResultSet resultSet = statement.executeQuery("DESC " + this.table + ";");
       while (resultSet.next()){

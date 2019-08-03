@@ -92,8 +92,4 @@ public class ParserDemo {
     return errorInfo.toString();
   }
 
-  public static void main(String[] args) {
-    ParserDemo pd = new ParserDemo("SELECT FROM hero WHERE name='fan';");
-    System.out.println(pd.parseSql());
-  }
 }
