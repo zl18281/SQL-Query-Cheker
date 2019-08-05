@@ -30,6 +30,15 @@
   <script src="js/execute.js"></script>
   <link rel="stylesheet" href="css/toolTip.css">
 
+  <style>
+    table {
+      border-collapse: collapse;
+    }
+    table, td, th {
+      border: 1px solid black;
+    }
+  </style>
+
 </head>
 <div id=nav>
   <a href="https://codemirror.net"><h1>CodeMirror</h1><img id=logo src="doc/logo.png"></a>
@@ -103,6 +112,11 @@
   <div style="width: 300px;height: auto;">
     <h2>Lisp Tree</h2>
     <p style="word-wrap:break-word;" id="tree"></p>
+  </div>
+
+  <div style="width: 400px;height: auto;">
+    <h2>View Query Result</h2>
+    <div id="queryResult"></div>
   </div>
   <!--
   <img id="tree" style="height: auto; width:auto; "src="img/tree.jpg"/>

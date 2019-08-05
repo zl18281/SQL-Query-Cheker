@@ -9,13 +9,13 @@ public class ConstructJSON {
 
     result.append("{");
     for(int i = 0; i < tables.size(); i++) {
-      result.append("\""+ i + "\":");
+      result.append("\""+ (i + 1) + "\":");
       result.append("{");
       for(int j = 0; j < tables.get(i).length; j++) {
-        result.append("\""+ j + "\":");
+        result.append("\""+ (j + 1) + "\":");
         result.append("{");
         for(int k = 0; k < tables.get(i)[j].length; k++) {
-          result.append("\""+ k + "\":");
+          result.append("\""+ (k + 1) + "\":");
           if(k < tables.get(i)[j].length - 1) {
             result.append("\""+ tables.get(i)[j][k] + "\",");
           }else{
