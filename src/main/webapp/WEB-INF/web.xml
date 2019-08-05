@@ -56,12 +56,22 @@
 
   <servlet>
     <servlet-name>sessionServlet</servlet-name>
-    <servlet-class>com.fan.session.sessionServlet</servlet-class>
+    <servlet-class>com.fan.session.servlet.sessionServlet</servlet-class>
   </servlet>
 
   <servlet-mapping>
     <servlet-name>sessionServlet</servlet-name>
     <url-pattern>/session</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>resultServlet</servlet-name>
+    <servlet-class>com.fan.result.servlet.resultServlet</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>resultServlet</servlet-name>
+    <url-pattern>/result</url-pattern>
   </servlet-mapping>
 
 </web-app>

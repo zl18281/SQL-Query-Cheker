@@ -1,4 +1,6 @@
-package com.fan.session;
+package com.fan.session.servlet;
+
+import com.fan.session.core.Validate;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

@@ -1,4 +1,4 @@
-package com.fan.session;
+package com.fan.session.core;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

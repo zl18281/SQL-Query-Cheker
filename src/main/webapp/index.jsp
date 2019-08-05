@@ -27,6 +27,7 @@
   <script src="js/getDB.js"></script>
   <script src="js/getTable.js"></script>
   <script src="js/cursor.js"></script>
+  <script src="js/execute.js"></script>
   <link rel="stylesheet" href="css/toolTip.css">
 
 </head>
@@ -57,7 +58,7 @@
     <br>Login<br>
     username: <input id="username" type="text" name="username" value="username" onfocus="value=''"/><br>
       password: <input id="password" type="password" name="password" value=""/><br>
-      <input type="submit"><br>
+      <input type="submit" value="Login"><br>
       </form>
     <%
       String username=null;
@@ -85,6 +86,8 @@
   <b>Tables</b>
   <select id="table">
   </select>
+  <br>
+  <button onclick="result();">Execute Query</button>
   <br><br>
   <div>
     <input id="fileName" type="text" value="filename" onfocus="value=''"/>
