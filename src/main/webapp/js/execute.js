@@ -34,6 +34,7 @@ function dataToTable (data) {
       numOfTables++;
     }
   for(let i = 0; i < numOfTables - 1; i++) {
+    let div = document.createElement("div")
     let htmlTable = document.createElement("table");
     let rows = [];
     let numOfRows = 1;
@@ -58,6 +59,8 @@ function dataToTable (data) {
       }
       htmlTable.appendChild(htmlRow);
     }
-    document.getElementById("queryResult").appendChild(htmlTable);
+    div.appendChild(htmlTable);
+    div.style.marginTop="10px";
+    document.getElementById("queryResult").appendChild(div);
   }
 }

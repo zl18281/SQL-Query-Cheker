@@ -28,6 +28,7 @@
   <script src="js/getTable.js"></script>
   <script src="js/cursor.js"></script>
   <script src="js/execute.js"></script>
+  <script src="js/showUser.js"></script>
   <link rel="stylesheet" href="css/toolTip.css">
 
   <style>
@@ -36,92 +37,112 @@
     }
     table, td, th {
       border: 1px solid black;
+      padding: 5px;
+      text-align: center;
     }
   </style>
 
 </head>
-<div id=nav>
-  <a href="https://codemirror.net"><h1>CodeMirror</h1><img id=logo src="doc/logo.png"></a>
-
-  <ul>
-    <li><a href="index.jsp">Home</a>
-    <li><a href="doc/manual.html">Manual</a>
-    <li><a href="https://github.com/codemirror/codemirror">Code</a>
-    <li><a href="" data-toggle="modal" data-target="#login-modal">LOGIN</a></li>
-  </ul>
-  <ul>
-    <li><a class=active href="#">MySQL Editor</a>
-  </ul>
-</div>
-
-<article id="core" style="width: auto">
-  <h2>Editor</h2>
-  <div>
-  <textarea id="code" class="textBox" name="code" rows="5"></textarea>
-    <div class="tooltip" style="float: right" onmouseenter="insertCodeHint();">Code Hint (Hover)
-      <div id="hint" class="tooltiptext">Tooltip text</div>
-    </div>
-  </div>
-  <div>
-    <form id="login" action="/SQL/session" method="post">
-    <br>Login<br>
-    username: <input id="username" type="text" name="username" value="username" onfocus="value=''"/><br>
-      password: <input id="password" type="password" name="password" value=""/><br>
-      <input type="submit" value="Login"><br>
+<div style="margin-left: 100px; float: left; margin-right: 25px; margin-top: 100px">
+  <fieldset>
+    <legend>
+      Login Menu
+    </legend>
+    <div id="loginSection">
+      <form id="login" action="/SQL/session" method="post" onsubmit="showUser();">
+        <br>Login<br>
+        username: <input id="username" type="text" name="username" value="username" onfocus="value=''"/><br>
+        password: <input id="password" type="password" name="password" value=""onfocus="value=''"/><br>
+        <input type="submit" value="Login">
+        <a href="/SQL" onclick="signOut();">Sign Out</a><br><br>
       </form>
+    </div>
     <%
-      String username=null;
+      String username="";
       Cookie[] cookieArr = request.getCookies();
       for(Cookie c:cookieArr){
         if(c.getName().equals("username")){
           username = URLDecoder.decode(c.getValue(), "utf-8");
         }
       }
-      out.print("User Name: " + username);
+      out.print("User Name(refresh): " + "<p id=\"username\">" + username + "</p>");
     %>
-  </div><br>
-  <button onclick="compileOne()">ANTLR</button>
-  <button onclick="compileTwo()">Packrat</button>
-  <button onclick="tree()">Tree</button>
-  <a href="syntax.html">See Syntax</a>
-  <br><br>
-  <button onclick="getDB();">Init Database</button>
-  <button onclick="getTable();">Init Table</button>
+  </fieldset>
   <br>
-  <b>Databases</b>
-  <select id="database">
-  </select>
-  <br>
-  <b>Tables</b>
-  <select id="table">
-  </select>
-  <br>
-  <button onclick="result();">Execute Query</button>
-  <br><br>
   <div>
-    <input id="fileName" type="text" value="filename" onfocus="value=''"/>
-    <button onclick="save()">Save</button>
+    <h3>Instructions</h3>
+    <ul>
+      <li>Use Chrome Browser or the syntax tree will not display</li>
+      <li>Refresh page after login and then username is visible</li>
+      <li>First press "Init database", then "Init table"</li>
+      <li>Press "ANTLR" to check SQL syntax, and "Tree" to show syntax tree</li>
+      <li>Query is executed and displayed by pressing "Execute Query"</li>
+      <li>Script can be saved with a filename</li>
+    </ul>
   </div>
+</div>
 
-  <br><br><br>
+
+<div id="core" style="width: 500px;margin-left:30px;margin-top:100px;float: left;" >
+  <fieldset>
+    <legend>
+      Editor
+    </legend>
+  <textarea id="code" class="textBox" name="code" rows="5" style="width: 500px"></textarea>
+    <div class="tooltip" style="float: right" onmouseenter="insertCodeHint();">Code Hint (Hover)
+      <div id="hint" class="tooltiptext">Tooltip text</div>
+    </div>
+  </fieldset>
+  <br>
+  <fieldset>
+    <legend>
+      Operation Panel
+    </legend>
+    <button onclick="getDB();">Init Database</button>
+    <b>Databases</b>
+    <select id="database">
+    </select>
+    <br>
+    <button onclick="getTable();">Init Table</button>
+    <b>Tables</b>
+    <select id="table">
+    </select><br><br>
+    <button onclick="compileOne()">ANTLR</button>
+    <button onclick="compileTwo()">Packrat</button>
+    <button onclick="tree()">Tree</button>
+    <a href="syntax.html">See Syntax Diagram</a>
+    <br><br>
+    <button onclick="result();">Execute Query</button>
+    <br><br>
+    <div>
+      <input id="fileName" type="text" value="filename" onfocus="value=''"/>
+      <button onclick="save()">Save</button>
+    </div>
+  </fieldset>
+
+
+  <!--
+  <img id="tree" style="height: auto; width:auto; "src="img/tree.jpg"/>
+  -->
+</div>
+
+<div style="width: 600px;margin-left:40px;margin-top:100px;float: left;">
+  <fieldset>
+    <legend>
+      Result Display
+    </legend>
   <div style="width: 300px;height: auto">
     <h2>Result</h2>
     <pre style="word-wrap:break-word;" id="result"></pre>
     <pre style="word-wrap:break-word;" id="error"></pre>
-  </div>
-  <div style="width: 300px;height: auto;">
-    <h2>Lisp Tree</h2>
-    <p style="word-wrap:break-word;" id="tree"></p>
   </div>
 
   <div style="width: 400px;height: auto;">
     <h2>View Query Result</h2>
     <div id="queryResult"></div>
   </div>
-  <!--
-  <img id="tree" style="height: auto; width:auto; "src="img/tree.jpg"/>
-  -->
-</article>
+    </fieldset>
+</div>
 
 <script>
   var editor = CodeMirror.fromTextArea(document.getElementById("code"), {

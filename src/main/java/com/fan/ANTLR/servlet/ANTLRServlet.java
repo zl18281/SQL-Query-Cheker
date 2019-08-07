@@ -24,7 +24,9 @@ public class ANTLRServlet extends HttpServlet {
     tempResult = request.getParameter("code");
     System.out.println(tempResult);
 
+
     File f = new File("../webapps/SQL/WEB-INF/resources/sql/temp.sql");
+    System.out.println(new File("").getAbsolutePath());
     try (PrintWriter pw = new PrintWriter(f)) {
       pw.print(tempResult);
     }catch(IOException e) {
