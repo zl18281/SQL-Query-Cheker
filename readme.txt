@@ -13,7 +13,7 @@ step 4: copy the war file in "target" folder to "webapp" folder of Tomact server
 
 step 5: run "startup.sh" of Tomcat
 
-step 6: visit site via: http://localhost:8080/SQL
+step 6: visit site via: http://localhost:8080/SQL (use Chrome Browser, or syntax tree will not show up)
 
 step 7: run "shutdown.sh" of Tomcat to stop the server
 
