@@ -5,17 +5,17 @@ step 0: step into src/main/webapp and run "npm install"
 
 step 1: download the latest maven build tool and add path environment
 
-step 2: download the latest Tomcat server
+step 2: download the latest Tomcat server and set environment variable
 
 step 3: from root project folder, run: "mvn package". A "target" folder should be generated
 
 step 4: copy the war file in "target" folder to "webapp" folder of Tomact server
 
-step 5: run "./startup.sh" of Tomcat （this must be invoked from /bin folder of Tomcat）
+step 5: run "catalina.sh start" to start Tomcat server.
 
 step 6: visit site via: http://localhost:8080/SQL (use Chrome Browser, or syntax tree will not show up)
 
-step 7: run "shutdown.sh" of Tomcat to stop the server
+step 7: run "catalina.sh stop" to stop the server
 
 note:
 there might be bugs related to differences between platforms, possible reasons might be:
@@ -25,7 +25,7 @@ there might be bugs related to differences between platforms, possible reasons m
 
 Software Usage：
 
-1. Login using MariaDB usernmae and password (like 'student'). Refresh the page, your username should be seen.
+1. Login using MariaDB username and password (like 'student'). Refresh the page, your username should be seen.
 2. Press 'Init database', the databases which your MariaDB account has access should be available as a drop down list.
 3. Choose one database from the list. At this time, when cursor is after 'FROM' keyword, all the tables will show up when you hover 'Code Hint'. Then Press 'Init table'. All tables in this db will show as a drop down list.
 4. Select one table from the list. At this time, when cursor is after '.' or 'SELECT', all the columns will show up when you hover 'Code Hint'.
