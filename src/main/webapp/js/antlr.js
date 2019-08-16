@@ -1,13 +1,13 @@
 function compileOne() {
   var code = editor.getValue();
+  let database = document.getElementById("database").value;
   console.log(code);
   $.ajax({
     type: "POST",
     url: "/SQL/sqlEditor",
-    data: {code: code},
+    data: {code: code, db:database},
     async: false,
     success: function () {
-      alert('success');
     },
     error: function () {
       alert('error');
@@ -21,7 +21,6 @@ function compileOne() {
       if (data == '' || data == null) {
         document.getElementById('result').innerHTML = '';
         document.getElementById('error').innerHTML = '';
-        document.getElementById('tree').innerText = '';
       } else {
         let errorInfo = JSON.parse(data);
         console.log(errorInfo);

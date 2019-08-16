@@ -1,6 +1,7 @@
-package com.fan.ANTLR.core;
+// Generated from MySqlParser.g4 by ANTLR 4.7.2
 
-// Generated from MySqlParser.java.g4 by ANTLR 4.7.2
+   package com.fan.ANTLR.core;
+
 
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.tree.ErrorNode;
@@ -11,7 +12,7 @@ import org.antlr.v4.runtime.tree.TerminalNode;
  * which can be extended to create a listener which only needs to handle a subset
  * of the available methods.
  */
-public class MySqlParserBaseListener implements MySqlParserListener {
+public class MySqlParserBaseListener implements com.fan.ANTLR.core.MySqlParserListener {
 	/**
 	 * {@inheritDoc}
 	 *

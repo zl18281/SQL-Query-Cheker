@@ -1,6 +1,7 @@
-package com.fan.ANTLR.core;
+// Generated from MySqlParser.g4 by ANTLR 4.7.2
 
-// Generated from MySqlParser.java.g4 by ANTLR 4.7.2
+   package com.fan.ANTLR.core;
+
 import org.antlr.v4.runtime.tree.AbstractParseTreeVisitor;
 
 /**
@@ -11,7 +12,7 @@ import org.antlr.v4.runtime.tree.AbstractParseTreeVisitor;
  * @param <T> The return type of the visit operation. Use {@link Void} for
  * operations with no return type.
  */
-public class MySqlParserBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements MySqlParserVisitor<T> {
+public class MySqlParserBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements com.fan.ANTLR.core.MySqlParserVisitor<T> {
 	/**
 	 * {@inheritDoc}
 	 *

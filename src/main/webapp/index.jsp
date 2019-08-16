@@ -60,9 +60,11 @@
     <%
       String username="";
       Cookie[] cookieArr = request.getCookies();
-      for(Cookie c:cookieArr){
-        if(c.getName().equals("username")){
-          username = URLDecoder.decode(c.getValue(), "utf-8");
+      if(cookieArr != null && cookieArr.length != 0) {
+        for(Cookie c:cookieArr){
+          if(c.getName().equals("username")){
+            username = URLDecoder.decode(c.getValue(), "utf-8");
+          }
         }
       }
       out.print("User Name(refresh): " + "<p id=\"username\">" + username + "</p>");
@@ -108,6 +110,7 @@
     <select id="table">
     </select><br><br>
     <button onclick="compileOne()">ANTLR</button>
+    <button onclick="semantic()">Semantic</button>
     <button onclick="compileTwo()">Packrat</button>
     <button onclick="tree()">Tree</button>
     <a href="syntax.html">See Syntax Diagram</a>
@@ -135,6 +138,7 @@
     <h2>Result</h2>
     <pre style="word-wrap:break-word;" id="result"></pre>
     <pre style="word-wrap:break-word;" id="error"></pre>
+    <pre style="word-wrap:break-word;" id="semantic"></pre>
   </div>
 
   <div style="width: 400px;height: auto;">
@@ -157,6 +161,15 @@
       }
     }
   });
+  /*
+  editor.on("change", function(){
+    setInterval(compileOne, 3000);
+  });
+  editor.on("change", function(){
+    setInterval(semantic, 6000);
+  });
+
+   */
 </script>
 
 <script src="js/antlr.js"></script>
@@ -164,6 +177,7 @@
 <script src="js/packrat.js"></script>
 <script src="js/save.js"></script>
 <script src="js/codeHint.js"></script>
+<script src="js/semantic.js"></script>
 <script>function save() {
   let file = new File([editor.getValue()],
     document.getElementById("fileName").value,

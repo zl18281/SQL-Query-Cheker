@@ -74,4 +74,14 @@
     <url-pattern>/result</url-pattern>
   </servlet-mapping>
 
+  <servlet>
+    <servlet-name>semanticServlet</servlet-name>
+    <servlet-class>com.fan.ANTLR.servlet.SemanticServlet</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>semanticServlet</servlet-name>
+    <url-pattern>/semantic</url-pattern>
+  </servlet-mapping>
+
 </web-app>

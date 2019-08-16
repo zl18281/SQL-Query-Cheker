@@ -1,12 +1,15 @@
 package com.fan.ANTLR.core;
 
+import com.fan.ANTLR.core.MySqlLexer;
 import org.antlr.v4.gui.TreeViewer;
 import org.antlr.v4.runtime.ANTLRErrorListener;
 import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.tree.ParseTree;
+import org.antlr.v4.runtime.tree.ParseTreeWalker;
 import org.antlr.v4.runtime.tree.Tree;
+import org.apache.log4j.Logger;
 
 import java.io.*;
 import java.lang.reflect.Method;
@@ -16,37 +19,47 @@ import java.util.Scanner;
 
 public class ParserDemo {
 
+  private String database;
+  private String username;
+  private String password;
+
+  private static Logger logger = Logger.getLogger(ParserDemo.class);
+
   private String code;
 
-  public ParserDemo(String code) {
-    System.out.println("hahaha");
+  public ParserDemo(String code, String database, String username, String password) {
     this.code = code;
+    this.database = database;
+    this.username = username;
+    this.password = password;
   }
 
   public String parseSql() {
 
     ANTLRErrorListener error = new UnderlineListener();
 
-    CharStream input = CharStreams.fromString(this.code.toUpperCase());
+    CharStream input = CharStreams.fromString(this.code);
     MySqlLexer lexer = new MySqlLexer(input);
     CommonTokenStream tokens = new CommonTokenStream(lexer);
     MySqlParser parser = new MySqlParser(tokens);
     parser.removeErrorListeners();
     parser.addErrorListener(error);
+
     ParseTree tree = parser.root();
+    ParseTreeWalker ptw = new ParseTreeWalker();
+    ColumnListener cl = new ColumnListener(parser, this.database, this.username, this.password);
+    ptw.walk(cl, tree);
+    //cl.getErrorColumns();
+
 
     //
-    System.out.println("1");
+
     List<String> rules = new ArrayList<>();
-    System.out.println("2");
     String[] rulesNames = parser.makeRuleNames();
     for(int i = 0; i < rulesNames.length; i++) {
       rules.add(rulesNames[i]);
     }
-    System.out.println("3");
     TreeViewer tv = new TreeViewer(rules, (Tree)tree);
-    System.out.println("4");
-
 
     try {
       File svgFile = new File("../webapps/SQL/img/tree.svg");
@@ -63,19 +76,7 @@ public class ParserDemo {
       e.printStackTrace();
     }
 
-
-
-    //
-    try(FileWriter fwTree = new FileWriter("../webapps/SQL/WEB-INF/resources/img/tree.txt")){
-      fwTree.write(tree.toStringTree(parser));
-    }catch(IOException e) {
-      e.printStackTrace();
-    }
-
-    System.out.println("right after parsing");
-
     File f = new File("../webapps/SQL/WEB-INF/resources/error/error.json");
-    System.out.println("file opened");
     StringBuilder errorInfo = new StringBuilder();
     try (Scanner in = new Scanner(f)) {
       while (in.hasNext()) {
