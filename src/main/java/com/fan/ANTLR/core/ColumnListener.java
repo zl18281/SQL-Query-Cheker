@@ -1,14 +1,13 @@
 package com.fan.ANTLR.core;
 
 import java.io.File;
-import java.io.FileWriter;
 import java.io.PrintWriter;
+import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class ColumnListener extends MySqlParserBaseListener {
 
@@ -31,16 +30,69 @@ public class ColumnListener extends MySqlParserBaseListener {
   public void enterSimpleSelect(MySqlParser.SimpleSelectContext ctx) {
     super.enterSimpleSelect(ctx);
     String[] columns = ctx.getChild(0).getChild(1).getText().split(",");
-    String table = ctx.getChild(0).getChild(2).getChild(1).getText();
-    getRightColumns(table);
-    getErrorColumns(columns);
-
+    System.out.println(250);
     System.out.println(ctx.getText());
     System.out.println(ctx.getChild(0).getText());
     System.out.println(ctx.getChild(0).getChild(0).getText());
     System.out.println(ctx.getChild(0).getChild(1).getText());
     System.out.println(ctx.getChild(0).getChild(2).getText());
 
+    try {
+      String table = ctx.getChild(0).getChild(2).getChild(1).getText();
+      System.out.println(260);
+      getRightColumns(table);
+      System.out.println(270);
+      getErrorColumns(columns);
+      System.out.println(280);
+    }catch(Exception e) {
+
+      String[] wrongColumns = pickWrongColumn(columns);
+      if(wrongColumns != null) {
+        File f = new File("../webapps/SQL/WEB-INF/resources/error/semanticError.json");
+        try (PrintWriter pw = new PrintWriter(f)) {
+          pw.print("{");
+          for (int i = 0; i < wrongColumns.length - 1; i++) {
+            pw.print("\"" + (i + 1) + "\":" + "\"" + wrongColumns[i] + "\",");
+          }
+          pw.print("\"" + wrongColumns.length + "\":" + "\"" +
+            wrongColumns[wrongColumns.length - 1] + "\"}");
+        }catch(Exception ex) {
+          ex.printStackTrace();
+        }
+      }
+      e.printStackTrace();
+    }
+  }
+
+  private String[] pickWrongColumn(String[] columns) {
+    int cnt = 0;
+    for(int i = 0; i < columns.length; i++) {
+      if(!isNumeric(columns[i])) {
+        cnt++;
+      }
+    }
+    if(cnt != 0) {
+      String[] wrongColumns = new String[cnt];
+      int j = 0;
+      for(int i = 0; i < columns.length; i++) {
+        if(!isNumeric(columns[i])) {
+          wrongColumns[j] = columns[i];
+          j++;
+        }
+      }
+      return wrongColumns;
+    }
+    return null;
+  }
+
+  public static boolean isNumeric(String str) {
+    String bigStr;
+    try {
+      bigStr = new BigDecimal(str).toString();
+    } catch (Exception e) {
+      return false;
+    }
+    return true;
   }
 
   private void getRightColumns(String table) {

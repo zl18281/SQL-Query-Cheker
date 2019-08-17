@@ -1,9 +1,12 @@
 package com.fan.ANTLR.core;
 
 import org.antlr.v4.runtime.*;
+import org.antlr.v4.runtime.misc.Interval;
 
-import java.io.*;
-import java.util.Collections;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.*;
 
 
@@ -14,6 +17,7 @@ public class UnderlineListener extends BaseErrorListener {
                           int line, int charPositionInLine,
                           String msg,
                           RecognitionException e) {
+    System.out.println(6);
 
     List<String> stack = ((Parser) recognizer).getRuleInvocationStack();
     Collections.reverse(stack);
@@ -50,12 +54,14 @@ public class UnderlineListener extends BaseErrorListener {
     File errorInfo = new File("../webapps/SQL/WEB-INF/resources/error/error.json");
 
     try (FileWriter f = new FileWriter(errorInfo)){
+      System.out.println(5);
       f.write("");
     }catch (Exception ex) {
       ex.printStackTrace();
     }
 
     try (PrintWriter p = new PrintWriter(errorInfo)) {
+      System.out.println(4);
       p.println("{");
       p.println("\"stack\":" + "\"" + error[0] + "\",");
       p.println("\"line\":" + "\"" + error[1] + "\",");
@@ -72,7 +78,15 @@ public class UnderlineListener extends BaseErrorListener {
 
       offendingToken = tokensTwo.getTokens().get((offendingToken).getTokenIndex());
 
-      String input = tokensTwo.getTokenSource().getInputStream().toString();
+      int cnt = 0;
+      for(int i = 0; i < tokensTwo.getTokens().size(); i++) {
+        cnt += tokensTwo.getTokens().get(i).getText().length();
+      }
+      Interval interval = new Interval(0, cnt);
+      String input = tokensTwo.getTokenSource().getInputStream().getText(interval);
+
+      System.out.println(input);
+
       String[] lines = input.split("\n");
       String errorLine = lines[line - 1];
 
@@ -101,11 +115,10 @@ public class UnderlineListener extends BaseErrorListener {
       p.println("\"numOfArrows\":" + "\"" + offendingToken.getText().length() + "\"");
       p.println("}");
       System.err.println();
-
     } catch (IOException ex) {
       System.err.println("file not found *** !");
     }
-
+    System.out.println(3);
 
     //for research only
     File f = new File("/home/fan/error.json");

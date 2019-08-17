@@ -39,20 +39,21 @@ public class ParserDemo {
     ANTLRErrorListener error = new UnderlineListener();
 
     CharStream input = CharStreams.fromString(this.code);
-    MySqlLexer lexer = new MySqlLexer(input);
+    CaseChangingCharStream upper = new CaseChangingCharStream(input, true);
+    MySqlLexer lexer = new MySqlLexer(upper);
     CommonTokenStream tokens = new CommonTokenStream(lexer);
     MySqlParser parser = new MySqlParser(tokens);
     parser.removeErrorListeners();
     parser.addErrorListener(error);
 
+    System.out.println(this.code);
     ParseTree tree = parser.root();
+    System.out.println(8);
     ParseTreeWalker ptw = new ParseTreeWalker();
     ColumnListener cl = new ColumnListener(parser, this.database, this.username, this.password);
     ptw.walk(cl, tree);
-    //cl.getErrorColumns();
-
-
-    //
+    System.out.println(9);
+    System.out.println(10);
 
     List<String> rules = new ArrayList<>();
     String[] rulesNames = parser.makeRuleNames();
@@ -60,6 +61,8 @@ public class ParserDemo {
       rules.add(rulesNames[i]);
     }
     TreeViewer tv = new TreeViewer(rules, (Tree)tree);
+
+    System.out.println(7);
 
     try {
       File svgFile = new File("../webapps/SQL/img/tree.svg");
@@ -78,6 +81,7 @@ public class ParserDemo {
 
     File f = new File("../webapps/SQL/WEB-INF/resources/error/error.json");
     StringBuilder errorInfo = new StringBuilder();
+    System.out.println(2);
     try (Scanner in = new Scanner(f)) {
       while (in.hasNext()) {
         errorInfo.append(in.next());
@@ -90,6 +94,8 @@ public class ParserDemo {
     }catch (Exception ex) {
       ex.printStackTrace();
     }
+    System.out.println(1);
+
     return errorInfo.toString();
   }
 
