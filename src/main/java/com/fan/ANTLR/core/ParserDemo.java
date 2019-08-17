@@ -1,6 +1,5 @@
 package com.fan.ANTLR.core;
 
-import com.fan.ANTLR.core.MySqlLexer;
 import org.antlr.v4.gui.TreeViewer;
 import org.antlr.v4.runtime.ANTLRErrorListener;
 import org.antlr.v4.runtime.CharStream;
@@ -50,10 +49,16 @@ public class ParserDemo {
     ParseTree tree = parser.root();
     System.out.println(8);
     ParseTreeWalker ptw = new ParseTreeWalker();
-    ColumnListener cl = new ColumnListener(parser, this.database, this.username, this.password);
+
+    TableListener tl = new TableListener(parser, this.database, this.username, this.password);
+    ptw.walk(tl, tree);
+    var tableSet = tl.getTableSet();
+
+    ColumnListener cl = new ColumnListener(parser, this.database, this.username, this.password, tableSet);
     ptw.walk(cl, tree);
-    System.out.println(9);
-    System.out.println(10);
+
+    SelectListener sl = new SelectListener(parser, this.database, this.username, this.password, cl.getActualColumnSet(), cl);
+    ptw.walk(sl, tree);
 
     List<String> rules = new ArrayList<>();
     String[] rulesNames = parser.makeRuleNames();

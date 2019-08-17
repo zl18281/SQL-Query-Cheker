@@ -2,7 +2,6 @@ package com.fan.ANTLR.core;
 
 import java.io.File;
 import java.io.PrintWriter;
-import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -10,92 +9,24 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 public class ColumnListener extends MySqlParserBaseListener {
-
   MySqlParser parser;
   private String database;
   private String username;
   private String password;
-  private ArrayList<String> columnSet = new ArrayList<>();
+  private ArrayList<String> actualColumnSet = new ArrayList<>();
+  private ArrayList<String> rightColumnSet = new ArrayList<>();
   private ArrayList<String> errorColumns = new ArrayList<>();
-  //MySqlParser.SelectColumnElementContext ctx;
+  private ArrayList<String> tableSet;
 
-  public ColumnListener(MySqlParser parser, String database, String username, String password) {
+  public ColumnListener(MySqlParser parser, String database, String username, String password, ArrayList<String> tableSet) {
     this.parser = parser;
     this.database = database;
     this.username = username;
     this.password = password;
+    this.tableSet = tableSet;
   }
 
-  @Override
-  public void enterSimpleSelect(MySqlParser.SimpleSelectContext ctx) {
-    super.enterSimpleSelect(ctx);
-    String[] columns = ctx.getChild(0).getChild(1).getText().split(",");
-    System.out.println(250);
-    System.out.println(ctx.getText());
-    System.out.println(ctx.getChild(0).getText());
-    System.out.println(ctx.getChild(0).getChild(0).getText());
-    System.out.println(ctx.getChild(0).getChild(1).getText());
-    System.out.println(ctx.getChild(0).getChild(2).getText());
-
-    try {
-      String table = ctx.getChild(0).getChild(2).getChild(1).getText();
-      System.out.println(260);
-      getRightColumns(table);
-      System.out.println(270);
-      getErrorColumns(columns);
-      System.out.println(280);
-    }catch(Exception e) {
-
-      String[] wrongColumns = pickWrongColumn(columns);
-      if(wrongColumns != null) {
-        File f = new File("../webapps/SQL/WEB-INF/resources/error/semanticError.json");
-        try (PrintWriter pw = new PrintWriter(f)) {
-          pw.print("{");
-          for (int i = 0; i < wrongColumns.length - 1; i++) {
-            pw.print("\"" + (i + 1) + "\":" + "\"" + wrongColumns[i] + "\",");
-          }
-          pw.print("\"" + wrongColumns.length + "\":" + "\"" +
-            wrongColumns[wrongColumns.length - 1] + "\"}");
-        }catch(Exception ex) {
-          ex.printStackTrace();
-        }
-      }
-      e.printStackTrace();
-    }
-  }
-
-  private String[] pickWrongColumn(String[] columns) {
-    int cnt = 0;
-    for(int i = 0; i < columns.length; i++) {
-      if(!isNumeric(columns[i])) {
-        cnt++;
-      }
-    }
-    if(cnt != 0) {
-      String[] wrongColumns = new String[cnt];
-      int j = 0;
-      for(int i = 0; i < columns.length; i++) {
-        if(!isNumeric(columns[i])) {
-          wrongColumns[j] = columns[i];
-          j++;
-        }
-      }
-      return wrongColumns;
-    }
-    return null;
-  }
-
-  public static boolean isNumeric(String str) {
-    String bigStr;
-    try {
-      bigStr = new BigDecimal(str).toString();
-    } catch (Exception e) {
-      return false;
-    }
-    return true;
-  }
-
-  private void getRightColumns(String table) {
+  private void getRightColumnsForOneTable(String table) {
     try {
       Class.forName("org.mariadb.jdbc.Driver");
       Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/" +
@@ -104,7 +35,7 @@ public class ColumnListener extends MySqlParserBaseListener {
       ResultSet resultSet = statement.executeQuery("DESC " + table);
       while (resultSet.next()) {
         System.out.println(resultSet.getString("Field"));
-        this.columnSet.add(resultSet.getString("Field"));
+        this.rightColumnSet.add(resultSet.getString("Field"));
       }
       connection.close();
     } catch (Exception e) {
@@ -112,10 +43,17 @@ public class ColumnListener extends MySqlParserBaseListener {
     }
   }
 
+  private void getRightColumns() {
+    for(int i = 0; i < this.tableSet.size(); i++) {
+      getRightColumnsForOneTable(this.tableSet.get(i));
+    }
+  }
+
   public void getErrorColumns(String[] actualColumns) {
+    getRightColumns();
 
     for(int i = 0; i < actualColumns.length; i++) {
-      if(!this.columnSet.contains(actualColumns[i])) {
+      if(!this.rightColumnSet.contains(actualColumns[i])) {
         System.out.println(actualColumns[i]);
         errorColumns.add(actualColumns[i]);
       }
@@ -139,4 +77,45 @@ public class ColumnListener extends MySqlParserBaseListener {
     }
   }
 
+  @Override
+  public void enterSelectColumnElement(MySqlParser.SelectColumnElementContext ctx) {
+    super.enterSelectColumnElement(ctx);
+    System.out.println("*");
+    System.out.println(ctx.getText());
+    System.out.println("*");
+    if(checkPrefix(ctx.getText())){
+      this.actualColumnSet.add(removePrefix(ctx.getText()));
+    }else{
+      this.actualColumnSet.add(ctx.getText());
+    }
+  }
+
+  private boolean checkPrefix(String columnName) {
+    for(int i = 0; i < columnName.length(); i++) {
+      if(columnName.charAt(i) == '.') {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  private String removePrefix(String columnName) {
+    int indexStart = 0;
+    for(int i = 0; i < columnName.length(); i++) {
+      if(columnName.charAt(i) == '.') {
+        indexStart = (i + 1);
+        return columnName.substring(indexStart);
+      }
+    }
+    return columnName.substring(indexStart);
+  }
+
+  public String[] getActualColumnSet() {
+    String[] actualColumns = new String[this.actualColumnSet.size()];
+
+    for(int i = 0; i < this.actualColumnSet.size(); i++) {
+      actualColumns[i] = this.actualColumnSet.get(i);
+    }
+    return actualColumns;
+  }
 }
