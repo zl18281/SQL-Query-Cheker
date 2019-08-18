@@ -79,7 +79,12 @@ public class UnderlineListener extends BaseErrorListener {
       String input = tokensTwo.getTokenSource().getInputStream().getText(interval);
 
       String[] lines = input.split("\n");
-      String errorLine = lines[line - 1];
+      String errorLine;
+      if(lines.length == 1) {
+        errorLine = lines[0];
+      }else{
+        errorLine = lines[line - 1];
+      }
 
       ArrayList<StringBuilder> errorLineText = new ArrayList<>();
       StringTokenizer t2 = new StringTokenizer(errorLine);
