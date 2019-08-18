@@ -7,6 +7,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class TableListener extends MySqlParserBaseListener {
   private ArrayList<String> actualTableSet = new ArrayList<>();
@@ -16,6 +17,7 @@ public class TableListener extends MySqlParserBaseListener {
   private String password;
   private ArrayList<String> rightTableSet = new ArrayList<>();
   private ArrayList<String> errorTables = new ArrayList<>();
+  private HashMap<String, String> alias = new HashMap<>();
 
   public TableListener(MySqlParser parser, String database, String username, String password) {
     this.parser = parser;
@@ -30,6 +32,19 @@ public class TableListener extends MySqlParserBaseListener {
     super.enterTableName(ctx);
 
     this.actualTableSet.add(ctx.getText());
+    collectTableAlias(ctx);
+  }
+
+  private void collectTableAlias(MySqlParser.TableNameContext ctx) {
+    ctx.getParent();
+    if(ctx.getParent().getChild(1).getText().equals("AS") ||
+      ctx.getParent().getChild(1).getText().equals("as")) {
+      this.alias.put(ctx.getParent().getChild(2).getText(), ctx.getText());
+    }
+  }
+
+  public HashMap<String, String> getAlias() {
+    return this.alias;
   }
 
   private void getRightTables() {
@@ -79,4 +94,5 @@ public class TableListener extends MySqlParserBaseListener {
   public ArrayList<String> getTableSet() {
     return this.actualTableSet;
   }
+
 }

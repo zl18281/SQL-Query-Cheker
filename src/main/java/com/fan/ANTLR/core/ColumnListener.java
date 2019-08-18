@@ -7,6 +7,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class ColumnListener extends MySqlParserBaseListener {
   MySqlParser parser;
@@ -17,13 +18,17 @@ public class ColumnListener extends MySqlParserBaseListener {
   private ArrayList<String> rightColumnSet = new ArrayList<>();
   private ArrayList<String> errorColumns = new ArrayList<>();
   private ArrayList<String> tableSet;
+  private HashMap<String, String> alias;
 
-  public ColumnListener(MySqlParser parser, String database, String username, String password, ArrayList<String> tableSet) {
+  public ColumnListener(MySqlParser parser, String database, String username,
+                        String password, ArrayList<String> tableSet,
+                        HashMap<String, String> alias) {
     this.parser = parser;
     this.database = database;
     this.username = username;
     this.password = password;
     this.tableSet = tableSet;
+    this.alias = alias;
     getRightColumns();
   }
 
@@ -31,8 +36,11 @@ public class ColumnListener extends MySqlParserBaseListener {
 
     for (int i = 0; i < actualColumns.length; i++) {
       if(checkPrefix(actualColumns[i])) {
+        if(!this.alias.containsKey(getPrefix(actualColumns[i]))) {
+          errorColumns.add(actualColumns[i]);
+        }
         if(!this.rightColumnSet.contains(removePrefix(actualColumns[i]))) {
-          errorColumns.add(removePrefix(actualColumns[i]));
+          errorColumns.add(actualColumns[i]);
         }
       }else{
         if(!this.rightColumnSet.contains(actualColumns[i]) ||
@@ -62,14 +70,32 @@ public class ColumnListener extends MySqlParserBaseListener {
   @Override
   public void enterFullColumnName(MySqlParser.FullColumnNameContext ctx) {
     super.enterFullColumnName(ctx);
+
     if (checkPrefix(ctx.getText())) {
-      if(checkAmbiguity(removePrefix(ctx.getText())) && !checkAmbiguity(ctx.getText())){
-        this.actualColumnSet.add(ctx.getText());
+      if(checkTableAlias(removePrefix(ctx.getText()))){
+        String original = this.alias.get(getPrefix(ctx.getText())) + "." + removePrefix(ctx.getText());
+        if(checkAmbiguity(removePrefix(original)) && !checkAmbiguity(original)){
+          this.actualColumnSet.add(original);
+        }else{
+          this.actualColumnSet.add(removePrefix(original));
+        }
       }else{
-        this.actualColumnSet.add(removePrefix(ctx.getText()));
+        if(checkAmbiguity(removePrefix(ctx.getText())) && !checkAmbiguity(ctx.getText())){
+          this.actualColumnSet.add(ctx.getText());
+        }else{
+          this.actualColumnSet.add(removePrefix(ctx.getText()));
+        }
       }
     } else {
       this.actualColumnSet.add(ctx.getText());
+    }
+  }
+
+  private boolean checkTableAlias(String columnNameWithAlias){
+    if(this.alias.containsValue(removePrefix(columnNameWithAlias))) {
+      return true;
+    }else{
+      return false;
     }
   }
 
@@ -88,6 +114,17 @@ public class ColumnListener extends MySqlParserBaseListener {
       if (columnName.charAt(i) == '.') {
         indexStart = (i + 1);
         return columnName.substring(indexStart);
+      }
+    }
+    return columnName.substring(indexStart);
+  }
+
+  private String getPrefix(String columnName) {
+    int indexStart = 0;
+    for (int i = 0; i < columnName.length(); i++) {
+      if (columnName.charAt(i) == '.') {
+        indexStart = i ;
+        return columnName.substring(0, indexStart);
       }
     }
     return columnName.substring(indexStart);

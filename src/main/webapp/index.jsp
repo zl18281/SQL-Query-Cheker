@@ -163,15 +163,10 @@
     }
   });
   editor.on("change", function(){
-    setInterval(compileOne, 3000);
+    compileOne();
+    semantic();
+    tableError();
   });
-  editor.on("change", function(){
-    setInterval(semantic, 3000);
-  });
-  editor.on("change", function(){
-    setInterval(tableError, 3000);
-  });
-
 </script>
 
 <script src="js/antlr.js"></script>

@@ -48,15 +48,18 @@ public class ParserDemo {
     ParseTree tree = parser.root();
     ParseTreeWalker ptw = new ParseTreeWalker();
 
-    TableListener tl = new TableListener(parser, this.database, this.username, this.password);
+    TableListener tl = new TableListener(parser, this.database,
+      this.username, this.password);
     ptw.walk(tl, tree);
     var tableSet = tl.getTableSet();
 
-    ColumnListener cl = new ColumnListener(parser, this.database, this.username, this.password, tableSet);
+    ColumnListener cl = new ColumnListener(parser, this.database,
+      this.username, this.password, tableSet, tl.getAlias());
     ptw.walk(cl, tree);
 
-    SelectListener sl = new SelectListener(parser, this.database, this.username, this.password,
-      cl.getActualColumnSet(), tl.getActualTableSet(), cl, tl);
+    SelectListener sl = new SelectListener(parser, this.database,
+      this.username, this.password, cl.getActualColumnSet(),
+      tl.getActualTableSet(), cl, tl);
     ptw.walk(sl, tree);
 
     List<String> rules = new ArrayList<>();
@@ -70,7 +73,8 @@ public class ParserDemo {
       File svgFile = new File("../webapps/SQL/img/tree.svg");
       BufferedWriter writer = new BufferedWriter(new FileWriter(svgFile));
       writer.write("<svg width=\"" + tv.getSize().getWidth() * 1.1 + "\" height=\"" +
-        tv.getSize().getHeight() * 1.1 + "\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\">");
+        tv.getSize().getHeight() * 1.1 +
+        "\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\">");
       Method m = tv.getClass().getDeclaredMethod("paintSVG", Writer.class);
       m.setAccessible(true);
       m.invoke(tv, writer);
