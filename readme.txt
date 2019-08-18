@@ -38,3 +38,4 @@ recent update:
 1. Parsing and semantic checking is going on while typing (every 3 seconds). Result is updated continously.
 2. When syntax is right, there will be semantic check of correctness of columns and tables, even for a "JOIN SELECT" with a "WHERE" clause.
 3. When column is ambiguous, it is treated as semantic error. But with a table name(plus a ".") as prefix, it is treated as right. 
+4. Column and table alias can be checked.
