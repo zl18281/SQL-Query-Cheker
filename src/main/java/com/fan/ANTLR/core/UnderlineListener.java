@@ -17,7 +17,6 @@ public class UnderlineListener extends BaseErrorListener {
                           int line, int charPositionInLine,
                           String msg,
                           RecognitionException e) {
-    System.out.println(6);
 
     List<String> stack = ((Parser) recognizer).getRuleInvocationStack();
     Collections.reverse(stack);
@@ -47,21 +46,15 @@ public class UnderlineListener extends BaseErrorListener {
     error[4] += "\"" + (errorMsg.size() - 1) + "\":" + "\"" + errorMsg.get(errorMsg.size() - 1) + "\"}";
 
 
-    for (int i = 0; i < error.length; i++) {
-      System.out.println(error[i]);
-    }
-
     File errorInfo = new File("../webapps/SQL/WEB-INF/resources/error/error.json");
 
     try (FileWriter f = new FileWriter(errorInfo)){
-      System.out.println(5);
       f.write("");
     }catch (Exception ex) {
       ex.printStackTrace();
     }
 
     try (PrintWriter p = new PrintWriter(errorInfo)) {
-      System.out.println(4);
       p.println("{");
       p.println("\"stack\":" + "\"" + error[0] + "\",");
       p.println("\"line\":" + "\"" + error[1] + "\",");
@@ -84,8 +77,6 @@ public class UnderlineListener extends BaseErrorListener {
       }
       Interval interval = new Interval(0, cnt);
       String input = tokensTwo.getTokenSource().getInputStream().getText(interval);
-
-      System.out.println(input);
 
       String[] lines = input.split("\n");
       String errorLine = lines[line - 1];
@@ -118,7 +109,6 @@ public class UnderlineListener extends BaseErrorListener {
     } catch (IOException ex) {
       System.err.println("file not found *** !");
     }
-    System.out.println(3);
 
     //for research only
     File f = new File("/home/fan/error.json");

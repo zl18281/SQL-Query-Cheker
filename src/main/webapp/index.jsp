@@ -161,7 +161,6 @@
       }
     }
   });
-  /*
   editor.on("change", function(){
     setInterval(compileOne, 3000);
   });
@@ -169,7 +168,6 @@
     setInterval(semantic, 6000);
   });
 
-   */
 </script>
 
 <script src="js/antlr.js"></script>

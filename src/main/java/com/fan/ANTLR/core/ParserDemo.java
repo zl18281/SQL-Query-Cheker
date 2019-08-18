@@ -45,9 +45,7 @@ public class ParserDemo {
     parser.removeErrorListeners();
     parser.addErrorListener(error);
 
-    System.out.println(this.code);
     ParseTree tree = parser.root();
-    System.out.println(8);
     ParseTreeWalker ptw = new ParseTreeWalker();
 
     TableListener tl = new TableListener(parser, this.database, this.username, this.password);
@@ -67,8 +65,6 @@ public class ParserDemo {
     }
     TreeViewer tv = new TreeViewer(rules, (Tree)tree);
 
-    System.out.println(7);
-
     try {
       File svgFile = new File("../webapps/SQL/img/tree.svg");
       BufferedWriter writer = new BufferedWriter(new FileWriter(svgFile));
@@ -86,7 +82,6 @@ public class ParserDemo {
 
     File f = new File("../webapps/SQL/WEB-INF/resources/error/error.json");
     StringBuilder errorInfo = new StringBuilder();
-    System.out.println(2);
     try (Scanner in = new Scanner(f)) {
       while (in.hasNext()) {
         errorInfo.append(in.next());
@@ -99,7 +94,6 @@ public class ParserDemo {
     }catch (Exception ex) {
       ex.printStackTrace();
     }
-    System.out.println(1);
 
     return errorInfo.toString();
   }

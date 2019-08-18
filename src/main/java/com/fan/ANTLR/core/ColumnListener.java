@@ -47,7 +47,6 @@ public class ColumnListener extends MySqlParserBaseListener {
       if (this.errorColumns.size() == 0) {
         pw.print("{}");
       } else {
-        System.out.println("*****");
         pw.print("{");
         for (int i = 0; i < this.errorColumns.size() - 1; i++) {
           pw.print("\"" + (i + 1) + "\":" + "\"" + this.errorColumns.get(i) + "\",");
@@ -97,12 +96,9 @@ public class ColumnListener extends MySqlParserBaseListener {
   public String[] getActualColumnSet() {
     String[] actualColumns = new String[this.actualColumnSet.size()];
 
-    System.out.println("Actual columns*");
     for (int i = 0; i < this.actualColumnSet.size(); i++) {
       actualColumns[i] = this.actualColumnSet.get(i);
-      System.out.println(this.actualColumnSet.get(i));
     }
-    System.out.println("Actual columns*");
     return actualColumns;
   }
 
@@ -114,7 +110,6 @@ public class ColumnListener extends MySqlParserBaseListener {
       Statement statement = connection.createStatement();
       ResultSet resultSet = statement.executeQuery("DESC " + table);
       while (resultSet.next()) {
-        System.out.println(resultSet.getString("Field"));
         this.rightColumnSet.add(resultSet.getString("Field"));
       }
       connection.close();
@@ -124,12 +119,9 @@ public class ColumnListener extends MySqlParserBaseListener {
   }
 
   private void getRightColumns() {
-    System.out.println("right columns*");
     for (int i = 0; i < this.tableSet.size(); i++) {
       getRightColumnsForOneTable(this.tableSet.get(i));
-      System.out.println(this.tableSet.get(i));
     }
-    System.out.println("right columns*");
   }
 
   private boolean checkAmbiguity(String s) {

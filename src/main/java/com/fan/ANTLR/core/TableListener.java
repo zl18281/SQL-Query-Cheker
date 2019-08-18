@@ -24,9 +24,6 @@ public class TableListener extends MySqlParserBaseListener {
   }
 
   public ArrayList<String> getTableSet(){
-    for(int i = 0; i < this.tableSet.size(); i++) {
-      System.out.println(this.tableSet.get(i));
-    }
     return this.tableSet;
   }
 }

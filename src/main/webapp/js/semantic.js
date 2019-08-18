@@ -4,6 +4,7 @@ function semantic() {
     url: "/SQL/semantic",
     dataType:"json",
     success: function(data) {
+      document.getElementById("semantic").innerText="";
       console.log(data);
       let s = "";
       let i = 1;

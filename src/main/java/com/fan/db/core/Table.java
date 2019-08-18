@@ -39,7 +39,6 @@ public class Table {
       for(int i = 1; i <= tb.size(); i++) {
         j.put(Integer.toString(i), tb.get(i - 1).toString());
       }
-      System.out.println(j.toString());
     } catch (Exception e) {
       e.printStackTrace();
     }

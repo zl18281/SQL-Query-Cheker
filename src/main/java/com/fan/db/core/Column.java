@@ -41,7 +41,6 @@ public class Column {
       for(int i = 1; i <= col.size(); i++) {
         j.put(Integer.toString(i), col.get(i - 1).toString());
       }
-      System.out.println(j.toString());
     } catch (Exception e) {
       e.printStackTrace();
     }

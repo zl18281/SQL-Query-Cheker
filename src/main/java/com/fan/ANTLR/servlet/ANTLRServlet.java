@@ -46,7 +46,6 @@ public class ANTLRServlet extends HttpServlet {
 
     ParserDemo p = new ParserDemo(tempResult, request.getParameter("db"), username, password);
     this.result = p.parseSql();
-    System.out.println(this.result);
 
   }
 
