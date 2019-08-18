@@ -110,7 +110,7 @@
     <select id="table">
     </select><br><br>
     <button onclick="compileOne()">ANTLR</button>
-    <button onclick="semantic()">Semantic</button>
+    <button onclick="tableError();semantic();">Semantic</button>
     <button onclick="compileTwo()">Packrat</button>
     <button onclick="tree()">Tree</button>
     <a href="syntax.html">See Syntax Diagram</a>
@@ -162,11 +162,14 @@
       }
     }
   });
+  /*
   editor.on("change", function(){
     compileOne();
     semantic();
     tableError();
   });
+
+   */
 </script>
 
 <script src="js/antlr.js"></script>
