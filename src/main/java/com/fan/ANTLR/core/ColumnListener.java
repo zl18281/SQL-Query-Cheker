@@ -47,14 +47,14 @@ public class ColumnListener extends MySqlParserBaseListener {
       } else {
         if (!this.rightColumnSet.contains(actualColumns[i]) ||
           checkAmbiguity(actualColumns[i])) {
-          if(!(this.columnAlias.containsKey(actualColumns[i]))){
-            if(checkPrefix(actualColumns[i]) &&
+          if (!(this.columnAlias.containsKey(actualColumns[i]))) {
+            if (checkPrefix(actualColumns[i]) &&
               !this.rightColumnSet.contains(removePrefix(columnAlias.get(actualColumns[i])))) {
               errorColumns.add(actualColumns[i]);
-            }else if(!checkPrefix(actualColumns[i]) &&
+            } else if (!checkPrefix(actualColumns[i]) &&
               !this.rightColumnSet.contains(columnAlias.get(actualColumns[i]))) {
               errorColumns.add(actualColumns[i]);
-            }else{
+            } else {
 
             }
           }
@@ -78,7 +78,7 @@ public class ColumnListener extends MySqlParserBaseListener {
       System.out.println(e.toString());
     }
 
-    for(int i = 0; i < this.actualColumnSet.size(); i++) {
+    for (int i = 0; i < this.actualColumnSet.size(); i++) {
       System.out.println("*");
       System.out.println(this.actualColumnSet.get(i));
       System.out.println("*");
@@ -96,7 +96,7 @@ public class ColumnListener extends MySqlParserBaseListener {
           this.columnAlias.put(ctx.getParent().getChild(2).getText(), ctx.getText());
           Iterator itOne = this.columnAlias.keySet().iterator();
           Iterator itTwo = this.columnAlias.values().iterator();
-          while(itOne.hasNext() && itTwo.hasNext()){
+          while (itOne.hasNext() && itTwo.hasNext()) {
             System.out.println(itOne.next() + " " + itTwo.next());
           }
         }

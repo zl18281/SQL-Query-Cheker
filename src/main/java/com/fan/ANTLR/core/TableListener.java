@@ -41,6 +41,9 @@ public class TableListener extends MySqlParserBaseListener {
       ctx.getParent().getChild(1).getText().equals("as")) {
       this.alias.put(ctx.getParent().getChild(2).getText(), ctx.getText());
     }
+    if(ctx.getParent().getChild(1) instanceof MySqlParser.UidContext) {
+      this.alias.put(ctx.getParent().getChild(1).getText(), ctx.getText());
+    }
   }
 
   public HashMap<String, String> getAlias() {
