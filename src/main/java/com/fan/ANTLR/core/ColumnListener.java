@@ -106,17 +106,22 @@ public class ColumnListener extends MySqlParserBaseListener {
     }
 
     if (checkPrefix(ctx.getText())) {
+      System.out.println(ctx.getText());
       if (checkTableAlias(removePrefix(ctx.getText()))) {
         String original = this.alias.get(getPrefix(ctx.getText())) + "." + removePrefix(ctx.getText());
+        System.out.println(original);
         if (checkAmbiguity(removePrefix(original)) && !checkAmbiguity(original)) {
           this.actualColumnSet.add(original);
         } else {
           this.actualColumnSet.add(removePrefix(original));
         }
       } else {
-        if (checkAmbiguity(removePrefix(ctx.getText())) && !checkAmbiguity(ctx.getText())) {
+        System.out.println();
+        if ((checkAmbiguity(removePrefix(ctx.getText())) && !checkAmbiguity(ctx.getText())) ||
+        !this.alias.containsKey(getPrefix(ctx.getText()))) {
           this.actualColumnSet.add(ctx.getText());
         } else {
+          System.out.println("**");
           this.actualColumnSet.add(removePrefix(ctx.getText()));
         }
       }
@@ -169,6 +174,7 @@ public class ColumnListener extends MySqlParserBaseListener {
 
     for (int i = 0; i < this.actualColumnSet.size(); i++) {
       actualColumns[i] = this.actualColumnSet.get(i);
+      System.out.println(this.actualColumnSet.get(i));
     }
     return actualColumns;
   }
