@@ -7,7 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!doctype html>
-<html>
+<html onload="showUser()">
 <head>
   <title>CodeMirror: Full Screen Editing</title>
   <meta charset="utf-8"/>
@@ -24,17 +24,13 @@
   <script src="addon/display/fullscreen.js"></script>
   <script src="addon/hint/show-hint.js"></script>
   <script src="addon/hint/sql-hint.js"></script>
-  <script src="js/getDB.js"></script>
-  <script src="js/getTable.js"></script>
-  <script src="js/cursor.js"></script>
-  <script src="js/execute.js"></script>
-  <script src="js/showUser.js"></script>
   <link rel="stylesheet" href="css/toolTip.css">
 
   <style>
     table {
       border-collapse: collapse;
     }
+
     table, td, th {
       border: 1px solid black;
       padding: 5px;
@@ -49,26 +45,18 @@
       Login Menu
     </legend>
     <div id="loginSection">
-      <form id="login" action="/SQL/session" method="post" onsubmit="showUser();">
+      <form id="login" action="/SQL/session" method="post">
         <br>Login<br>
         username: <input id="username" type="text" name="username" value="username" onfocus="value=''"/><br>
-        password: <input id="password" type="password" name="password" value=""onfocus="value=''"/><br>
-        <input type="submit" value="Login">
+        password: <input id="password" type="password" name="password" value="" onfocus="value=''"/><br>
+        <input type="submit" value="Login" onmousemove="showUser()">
         <a href="/SQL" onclick="signOut();">Sign Out</a><br><br>
       </form>
+      <div>
+        User Name:
+        <p id="name"></p>
+      </div>
     </div>
-    <%
-      String username="";
-      Cookie[] cookieArr = request.getCookies();
-      if(cookieArr != null && cookieArr.length != 0) {
-        for(Cookie c:cookieArr){
-          if(c.getName().equals("username")){
-            username = URLDecoder.decode(c.getValue(), "utf-8");
-          }
-        }
-      }
-      out.print("User Name(refresh): " + "<p id=\"username\">" + username + "</p>");
-    %>
   </fieldset>
   <br>
   <div>
@@ -85,12 +73,12 @@
 </div>
 
 
-<div id="core" style="width: 500px;margin-left:30px;margin-top:100px;float: left;" >
+<div id="core" style="width: 500px;margin-left:30px;margin-top:100px;float: left;">
   <fieldset>
     <legend>
       Editor
     </legend>
-  <textarea id="code" class="textBox" name="code" rows="5" style="width: 500px"></textarea>
+    <textarea id="code" class="textBox" name="code" rows="5" style="width: 500px"></textarea>
     <div class="tooltip" style="float: right" onmouseenter="insertCodeHint();">Code Hint (Hover)
       <div id="hint" class="tooltiptext">Tooltip text</div>
     </div>
@@ -134,19 +122,19 @@
     <legend>
       Result Display
     </legend>
-  <div style="width: 300px;height: auto">
-    <h2>Result</h2>
-    <pre style="word-wrap:break-word;" id="result"></pre>
-    <pre style="word-wrap:break-word;" id="error"></pre>
-    <pre style="word-wrap:break-word;" id="semantic"></pre>
-    <pre style="word-wrap:break-word;" id="tableError"></pre>
-  </div>
+    <div style="width: 300px;height: auto">
+      <h2>Result</h2>
+      <pre style="word-wrap:break-word;" id="result"></pre>
+      <pre style="word-wrap:break-word;" id="error"></pre>
+      <pre style="word-wrap:break-word;" id="semantic"></pre>
+      <pre style="word-wrap:break-word;" id="tableError"></pre>
+    </div>
 
-  <div style="width: 400px;height: auto;">
-    <h2>View Query Result</h2>
-    <div id="queryResult"></div>
-  </div>
-    </fieldset>
+    <div style="width: 400px;height: auto;">
+      <h2>View Query Result</h2>
+      <div id="queryResult"></div>
+    </div>
+  </fieldset>
 </div>
 
 <script>
@@ -162,16 +150,19 @@
       }
     }
   });
-  /*
-  editor.on("change", function(){
+  editor.on("change", function () {
     compileOne();
     semantic();
     tableError();
   });
 
-   */
 </script>
 
+<script src="js/getDB.js"></script>
+<script src="js/getTable.js"></script>
+<script src="js/cursor.js"></script>
+<script src="js/execute.js"></script>
+<script src="js/showUser.js"></script>
 <script src="js/antlr.js"></script>
 <script src="js/tree.js"></script>
 <script src="js/packrat.js"></script>

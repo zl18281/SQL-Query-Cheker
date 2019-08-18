@@ -36,14 +36,19 @@ public class TableListener extends MySqlParserBaseListener {
   }
 
   private void collectTableAlias(MySqlParser.TableNameContext ctx) {
-    ctx.getParent();
-    if(ctx.getParent().getChild(1).getText().equals("AS") ||
-      ctx.getParent().getChild(1).getText().equals("as")) {
-      this.alias.put(ctx.getParent().getChild(2).getText(), ctx.getText());
+    try {
+      ctx.getParent();
+      if(ctx.getParent().getChild(1).getText().equals("AS") ||
+        ctx.getParent().getChild(1).getText().equals("as")) {
+        this.alias.put(ctx.getParent().getChild(2).getText(), ctx.getText());
+      }
+      if(ctx.getParent().getChild(1) instanceof MySqlParser.UidContext) {
+        this.alias.put(ctx.getParent().getChild(1).getText(), ctx.getText());
+      }
+    }catch(Exception e) {
+      System.out.println(e.toString());
     }
-    if(ctx.getParent().getChild(1) instanceof MySqlParser.UidContext) {
-      this.alias.put(ctx.getParent().getChild(1).getText(), ctx.getText());
-    }
+
   }
 
   public HashMap<String, String> getAlias() {

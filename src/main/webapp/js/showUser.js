@@ -1,6 +1,5 @@
 function showUser() {
-    document.getElementById("loginSection").style.visibility="false";
-    document.getElementById("username").innerText = getCookie("username");
+    document.getElementById("name").innerText = getCookie("username");
 }
 
 function signOut() {

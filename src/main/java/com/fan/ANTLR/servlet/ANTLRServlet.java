@@ -43,10 +43,8 @@ public class ANTLRServlet extends HttpServlet {
         password = URLDecoder.decode(c.getValue(), "utf-8");
       }
     }
-
-    ParserDemo p = new ParserDemo(tempResult, request.getParameter("db"), username, password);
-    this.result = p.parseSql();
-
+      ParserDemo p = new ParserDemo(tempResult, request.getParameter("db"), username, password);
+      this.result = p.parseSql();
   }
 
   protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
