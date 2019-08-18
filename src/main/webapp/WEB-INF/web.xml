@@ -75,13 +75,23 @@
   </servlet-mapping>
 
   <servlet>
-    <servlet-name>semanticServlet</servlet-name>
-    <servlet-class>com.fan.ANTLR.servlet.SemanticServlet</servlet-class>
+    <servlet-name>columnServlet</servlet-name>
+    <servlet-class>com.fan.ANTLR.servlet.columnServlet</servlet-class>
   </servlet>
 
   <servlet-mapping>
-    <servlet-name>semanticServlet</servlet-name>
+    <servlet-name>columnServlet</servlet-name>
     <url-pattern>/semantic</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>tableServlet</servlet-name>
+    <servlet-class>com.fan.ANTLR.servlet.tableServlet</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>tableServlet</servlet-name>
+    <url-pattern>/table</url-pattern>
   </servlet-mapping>
 
 </web-app>

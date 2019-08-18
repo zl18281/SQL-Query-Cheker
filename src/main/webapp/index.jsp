@@ -139,6 +139,7 @@
     <pre style="word-wrap:break-word;" id="result"></pre>
     <pre style="word-wrap:break-word;" id="error"></pre>
     <pre style="word-wrap:break-word;" id="semantic"></pre>
+    <pre style="word-wrap:break-word;" id="tableError"></pre>
   </div>
 
   <div style="width: 400px;height: auto;">
@@ -165,7 +166,10 @@
     setInterval(compileOne, 3000);
   });
   editor.on("change", function(){
-    setInterval(semantic, 6000);
+    setInterval(semantic, 3000);
+  });
+  editor.on("change", function(){
+    setInterval(tableError, 3000);
   });
 
 </script>
@@ -176,6 +180,7 @@
 <script src="js/save.js"></script>
 <script src="js/codeHint.js"></script>
 <script src="js/semantic.js"></script>
+<script src="js/tableError.js"></script>
 <script>function save() {
   let file = new File([editor.getValue()],
     document.getElementById("fileName").value,

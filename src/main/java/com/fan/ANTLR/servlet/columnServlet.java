@@ -10,7 +10,7 @@ import java.io.IOException;
 import java.util.Scanner;
 
 @WebServlet(name = "SemanticServlet")
-public class SemanticServlet extends HttpServlet {
+public class columnServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
     }
@@ -30,6 +30,6 @@ public class SemanticServlet extends HttpServlet {
       }else{
         response.getWriter().print("{}");
       }
-      
+
     }
 }

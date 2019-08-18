@@ -55,7 +55,8 @@ public class ParserDemo {
     ColumnListener cl = new ColumnListener(parser, this.database, this.username, this.password, tableSet);
     ptw.walk(cl, tree);
 
-    SelectListener sl = new SelectListener(parser, this.database, this.username, this.password, cl.getActualColumnSet(), cl);
+    SelectListener sl = new SelectListener(parser, this.database, this.username, this.password,
+      cl.getActualColumnSet(), tl.getActualTableSet(), cl, tl);
     ptw.walk(sl, tree);
 
     List<String> rules = new ArrayList<>();

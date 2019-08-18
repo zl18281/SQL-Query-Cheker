@@ -16,17 +16,23 @@ public class SelectListener extends MySqlParserBaseListener {
   private String username;
   private String password;
   String[] actualColumnSet;
+  private ArrayList<String> actualTableSet;
   private ArrayList<String> rightColumnSet = new ArrayList<>();
   private ArrayList<String> errorColumns = new ArrayList<>();
   private ColumnListener cl;
+  private TableListener tl;
 
-  public SelectListener(MySqlParser parser, String database, String username, String password, String[] actualColumns, ColumnListener cl) {
+  public SelectListener(MySqlParser parser, String database,
+                        String username, String password, String[] actualColumns, ArrayList<String> actualTableSet,
+                        ColumnListener cl, TableListener tl) {
     this.parser = parser;
     this.database = database;
     this.username = username;
     this.password = password;
     this.actualColumnSet = actualColumns;
+    this.actualTableSet = actualTableSet;
     this.cl = cl;
+    this.tl = tl;
   }
 
   @Override
@@ -35,6 +41,7 @@ public class SelectListener extends MySqlParserBaseListener {
 
     try {
       cl.getErrorColumns(this.actualColumnSet);
+      tl.getErrorTables(this.actualTableSet);
     }catch(Exception e) {
 
       String[] wrongColumns = pickWrongColumn(this.actualColumnSet);
