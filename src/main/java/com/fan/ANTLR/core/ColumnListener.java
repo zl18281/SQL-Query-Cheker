@@ -34,33 +34,45 @@ public class ColumnListener extends MySqlParserBaseListener {
     getRightColumns();
   }
 
-  public void getErrorColumns(String[] actualColumns) {
-
-    for (int i = 0; i < actualColumns.length; i++) {
-      if (checkPrefix(actualColumns[i])) {
-        if (!this.alias.containsKey(getPrefix(actualColumns[i]))) {
-          errorColumns.add(actualColumns[i]);
-        }
-        if (!this.rightColumnSet.contains(removePrefix(actualColumns[i]))) {
-          errorColumns.add(actualColumns[i]);
-        }
-      } else {
-        if (!this.rightColumnSet.contains(actualColumns[i]) ||
-          checkAmbiguity(actualColumns[i])) {
-          if (!(this.columnAlias.containsKey(actualColumns[i]))) {
-            if (checkPrefix(actualColumns[i]) &&
-              !this.rightColumnSet.contains(removePrefix(columnAlias.get(actualColumns[i])))) {
-              errorColumns.add(actualColumns[i]);
-            } else if (!checkPrefix(actualColumns[i]) &&
-              !this.rightColumnSet.contains(columnAlias.get(actualColumns[i]))) {
-              errorColumns.add(actualColumns[i]);
-            } else {
-
-            }
-          }
+  private void removeDuplicate() {
+    for(int i = 0 ; i  <  this.errorColumns.size() - 1; i ++ )  {
+      for(int j = errorColumns.size() - 1; j > i; j-- )  {
+        if  (errorColumns.get(j).equals(errorColumns.get(i)))  {
+          errorColumns.remove(j);
         }
       }
     }
+  }
+
+  public void getErrorColumns(String[] actualColumns) {
+
+    for (int i = 0; i < actualColumns.length; i++) {
+        if (checkPrefix(actualColumns[i])) {
+          if (!this.alias.containsKey(getPrefix(actualColumns[i]))) {
+            errorColumns.add(actualColumns[i]);
+          }
+          if (!this.rightColumnSet.contains(removePrefix(actualColumns[i]))) {
+            errorColumns.add(actualColumns[i]);
+          }
+        } else {
+          if (!this.rightColumnSet.contains(actualColumns[i]) ||
+            checkAmbiguity(actualColumns[i])) {
+            if (!(this.columnAlias.containsKey(actualColumns[i]))) {
+              if (checkPrefix(actualColumns[i]) &&
+                !this.rightColumnSet.contains(removePrefix(columnAlias.get(actualColumns[i])))) {
+                errorColumns.add(actualColumns[i]);
+              } else if (!checkPrefix(actualColumns[i]) &&
+                !this.rightColumnSet.contains(columnAlias.get(actualColumns[i]))) {
+                errorColumns.add(actualColumns[i]);
+              } else {
+
+              }
+            }
+          }
+        }
+    }
+
+    removeDuplicate();
 
     File f = new File("../webapps/SQL/WEB-INF/resources/error/semanticError.json");
     try (PrintWriter pw = new PrintWriter(f)) {
@@ -91,6 +103,15 @@ public class ColumnListener extends MySqlParserBaseListener {
 
     try {
       var asClause = ctx.getParent();
+      var aggFunction = ctx.getParent().getParent().getParent();
+      System.out.println("XXXXX");
+      System.out.println(aggFunction.getText());
+      System.out.println(aggFunction.getClass());
+      System.out.println("XXXXX");
+      if (aggFunction instanceof MySqlParser.AggregateFunctionCallContext) {
+        System.out.println("%%%");
+        this.rightColumnSet.add(aggFunction.getParent().getChild(2).getText());
+      }
       if (asClause.getChild(1).getText().equals("AS")) {
         if (!this.columnAlias.containsKey(asClause.getChild(1).getText())) {
           this.columnAlias.put(ctx.getParent().getChild(2).getText(), ctx.getText());
@@ -101,6 +122,7 @@ public class ColumnListener extends MySqlParserBaseListener {
           }
         }
       }
+
     } catch (Exception e) {
       System.out.println(e.toString());
     }
@@ -118,7 +140,7 @@ public class ColumnListener extends MySqlParserBaseListener {
       } else {
         System.out.println();
         if ((checkAmbiguity(removePrefix(ctx.getText())) && !checkAmbiguity(ctx.getText())) ||
-        !this.alias.containsKey(getPrefix(ctx.getText()))) {
+          !this.alias.containsKey(getPrefix(ctx.getText()))) {
           this.actualColumnSet.add(ctx.getText());
         } else {
           System.out.println("**");
@@ -214,20 +236,4 @@ public class ColumnListener extends MySqlParserBaseListener {
       return false;
     }
   }
-
-  /*
-  @Override
-  public void enterSelectColumnElement(MySqlParser.SelectColumnElementContext ctx) {
-    super.enterSelectColumnElement(ctx);
-    System.out.println("*");
-    System.out.println(ctx.getText());
-    System.out.println("*");
-    if(checkPrefix(ctx.getText())){
-      this.actualColumnSet.add(removePrefix(ctx.getText()));
-    }else{
-      this.actualColumnSet.add(ctx.getText());
-    }
-  }
-
-   */
 }
