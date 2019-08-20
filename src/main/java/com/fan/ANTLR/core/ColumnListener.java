@@ -1,6 +1,7 @@
 package com.fan.ANTLR.core;
 
 import java.io.File;
+import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -8,7 +9,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
+import java.util.Scanner;
 
 public class ColumnListener extends MySqlParserBaseListener {
   MySqlParser parser;
@@ -96,6 +97,16 @@ public class ColumnListener extends MySqlParserBaseListener {
     } catch (Exception e) {
 
     }
+
+    File fs = new File("/home/fan/semanticError.json");
+    try(Scanner fr = new Scanner(f); FileWriter fw = new FileWriter(fs)) {
+      while(fr.hasNext()) {
+        fw.write(fr.next());
+      }
+    }catch(Exception ex) {
+        ex.printStackTrace();
+    }
+
   }
 
   @Override

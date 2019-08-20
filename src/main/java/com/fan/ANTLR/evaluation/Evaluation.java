@@ -13,18 +13,38 @@ public class Evaluation {
     StringBuilder query = new StringBuilder();
     File f = new File("/home/fan/testing.sql");
 
-    for(int j = 5; j <= 200; j+=5) {
+    for(int j = 5; j <= 100; j+=5) {
       try (PrintWriter fw = new PrintWriter(f)) {
-        for (int i = 0; i < (j - 1); i++) {
-          fw.println("SELECT Student.nam AS n, Enrol.grade AS g, Unit.title AS t\n" +
-            "FROM Student INNER JOIN Enrol ON Enrol.studen=Student.id\n" +
+
+        for (int i = 1; i < j; i++) {
+          fw.println("SELECT Student.name AS n, Enrol.grade AS g, Unit.title AS t\n" +
+            "FROM Student INNER JOIN Enrol ON Enrol.student=Student.id\n" +
             "INNER JOIN Unit ON Enrol.unit=Unit.id\n" +
-            "WHERE Unit.titl='Databases' UNION ");
+            "WHERE Unit.title='Databases';");
         }
-        fw.println("SELECT Student.nam AS n, Enrol.grade AS g, Unit.title AS t\n" +
-          "FROM Student INNER JOIN Enrol ON Enrol.studen=Student.id\n" +
+        fw.println("SELECT Student.name AS n, Enrol.grade AS g, Unit.title AS t\n" +
+          "FROM Studen INNER JOIN Enrol ON Enrol.student=Student.id\n" +
           "INNER JOIN Unit ON Enrol.unit=Unit.id\n" +
-          "WHERE Unit.titl='Databases';");
+          "WHERE Unit.title='Databases';");
+        for (int i = 1; i <= (100 - j); i++) {
+          fw.println("SELECT Student.name AS n, Enrol.grade AS g, Unit.title AS t\n" +
+            "FROM Student INNER JOIN Enrol ON Enrol.student=Student.id\n" +
+            "INNER JOIN Unit ON Enrol.unit=Unit.id\n" +
+            "WHERE Unit.title='Databases';");
+        }
+
+        /*
+        for (int i = 0; i < j; i++) {
+          fw.println("SELECT * FROM\n" +
+            "(SELECT Student.name AS n, Enrol.grade AS g, Unit.title AS t\n" +
+            "FROM Student INNER JOIN Enrol ON Enrol.student=Student.id\n" +
+            "INNER JOIN Unit ON Enrol.unit=Unit.id\n" +
+            "WHERE Unit.title='Databases') AS t\n" +
+            "WHERE t.g > 60;");
+        }
+
+         */
+
       } catch (Exception e) {
         e.printStackTrace();
       }

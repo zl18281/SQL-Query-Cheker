@@ -69,6 +69,7 @@ public class ParserDemo {
       this.username, this.password, cl.getActualColumnSet(),
       tl.getActualTableSet(), cl, tl);
     ptw.walk(sl, tree);
+
     long endSemanticCheck = new Date().getTime(); //check time consumed for semantic analysis
     writeSemanticTimeToFile(Double.toString((endSemanticCheck - startSemanticCheck)/1000.0), run);
 
