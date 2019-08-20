@@ -50,7 +50,7 @@ public class TableListener extends MySqlParserBaseListener {
         }
       }
     }catch(Exception e) {
-      System.out.println(e.toString());
+
     }
 
   }
@@ -70,7 +70,7 @@ public class TableListener extends MySqlParserBaseListener {
         rightTableSet.add(resultSet.getString(1));
       }
     }catch(Exception e) {
-      e.printStackTrace();
+
     }
   }
 
@@ -94,7 +94,7 @@ public class TableListener extends MySqlParserBaseListener {
           this.errorTables.get(this.errorTables.size() - 1) + "\"}");
       }
     } catch (Exception e) {
-      System.out.println(e.toString());
+
     }
   }
 

@@ -51,7 +51,7 @@ public class UnderlineListener extends BaseErrorListener {
     try (FileWriter f = new FileWriter(errorInfo)){
       f.write("");
     }catch (Exception ex) {
-      ex.printStackTrace();
+
     }
 
     try (PrintWriter p = new PrintWriter(errorInfo)) {
@@ -61,8 +61,6 @@ public class UnderlineListener extends BaseErrorListener {
       p.println("\"charPositionInLine\":" + "\"" + error[2] + "\",");
       p.println("\"offendingSymbol\":" + "\"" + error[3] + "\",");
       p.println("\"msg\":" + error[4] + ",");
-      //p.println("}");
-      System.err.println("line " + line + ":" + charPositionInLine + " " + msg);
 
       CommonTokenStream tokensTwo =
         (CommonTokenStream) recognizer.getInputStream();
@@ -100,19 +98,15 @@ public class UnderlineListener extends BaseErrorListener {
       errorLineInJson.append(temp);
 
       p.println("\"errorLine\":" + errorLineInJson.toString() + ",");
-      System.err.println(errorLine);
-      for (int i = 0; i < charPositionInLine; i++) System.err.print(" ");
+
       p.println("\"numOfSpaces\":" + "\"" + (charPositionInLine) + "\",");
       int start = offendingToken.getStartIndex();
       int stop = offendingToken.getStopIndex();
-      if (start >= 0 && stop >= 0) {
-        for (int i = start; i <= stop; i++) System.err.print("^");
-      }
       p.println("\"numOfArrows\":" + "\"" + offendingToken.getText().length() + "\"");
       p.println("}");
-      System.err.println();
+
     } catch (IOException ex) {
-      System.err.println("file not found *** !");
+
     }
 
     //for research only
@@ -122,7 +116,7 @@ public class UnderlineListener extends BaseErrorListener {
         fw.write(fr.next());
       }
     }catch(Exception ex) {
-      e.printStackTrace();
+
     }
   }
 }

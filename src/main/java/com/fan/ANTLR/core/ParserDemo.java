@@ -13,6 +13,7 @@ import org.apache.log4j.Logger;
 import java.io.*;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
 
@@ -25,12 +26,14 @@ public class ParserDemo {
   private static Logger logger = Logger.getLogger(ParserDemo.class);
 
   private String code;
+  private int run;
 
-  public ParserDemo(String code, String database, String username, String password) {
+  public ParserDemo(String code, String database, String username, String password, int run) {
     this.code = code;
     this.database = database;
     this.username = username;
     this.password = password;
+    this.run = run;
   }
 
   public String parseSql() {
@@ -45,7 +48,12 @@ public class ParserDemo {
     parser.removeErrorListeners();
     parser.addErrorListener(error);
 
+    long startSyntaxCheck = new Date().getTime(); //check time consumed for syntax analysis
     ParseTree tree = parser.root();
+    long endSyntaxCheck = new Date().getTime(); //check time consumed for syntax analysis
+    writeSyntaxTimeToFile(Double.toString((endSyntaxCheck - startSyntaxCheck)/1000.0), run);
+
+    long startSemanticCheck = new Date().getTime(); //check time consumed for semantic analysis
     ParseTreeWalker ptw = new ParseTreeWalker();
 
     TableListener tl = new TableListener(parser, this.database,
@@ -61,7 +69,10 @@ public class ParserDemo {
       this.username, this.password, cl.getActualColumnSet(),
       tl.getActualTableSet(), cl, tl);
     ptw.walk(sl, tree);
+    long endSemanticCheck = new Date().getTime(); //check time consumed for semantic analysis
+    writeSemanticTimeToFile(Double.toString((endSemanticCheck - startSemanticCheck)/1000.0), run);
 
+    long startBuildingTree = new Date().getTime();
     List<String> rules = new ArrayList<>();
     String[] rulesNames = parser.makeRuleNames();
     for(int i = 0; i < rulesNames.length; i++) {
@@ -82,9 +93,13 @@ public class ParserDemo {
       writer.flush();
       writer.close();
     }catch(Exception e) {
-      e.printStackTrace();
+        System.out.println(System.getProperty("user.dir"));
+        e.printStackTrace();
     }
+    long endBuildingTree = new Date().getTime();
+    writeTreeTimeToFile(Double.toString((endBuildingTree - startBuildingTree)/1000.0), run);
 
+    long startOtherTask = new Date().getTime();
     File f = new File("../webapps/SQL/WEB-INF/resources/error/error.json");
     StringBuilder errorInfo = new StringBuilder();
     try (Scanner in = new Scanner(f)) {
@@ -92,15 +107,93 @@ public class ParserDemo {
         errorInfo.append(in.next());
       }
     } catch (IOException e) {
-      System.err.println("file not found ** !");
+
     }
     try (FileWriter fw = new FileWriter(f)){
       fw.write("");
     }catch (Exception ex) {
-      ex.printStackTrace();
+
     }
+    long endOtherTask = new Date().getTime();
+    writeOtherTimeToFile(Double.toString((endOtherTask - startOtherTask)/1000.0), run);
 
     return errorInfo.toString();
+  }
+
+  private void writeSyntaxTimeToFile(String s, int j) {
+    File f = new File("/home/fan/syntax.txt");
+    BufferedWriter out = null;
+    try {
+      out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(f, true)));
+      out.write(j + " " + s + "\n");
+    } catch (Exception e) {
+      e.printStackTrace();
+    }finally {
+      try {
+        if (out != null) {
+          out.close();
+        }
+      } catch (IOException e) {
+
+      }
+    }
+  }
+
+  private void writeSemanticTimeToFile(String s, int j) {
+    File f = new File("/home/fan/semantic.txt");
+    BufferedWriter out = null;
+    try {
+      out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(f, true)));
+      out.write(j + " " + s + "\n");
+    } catch (Exception e) {
+      e.printStackTrace();
+    }finally {
+      try {
+        if (out != null) {
+          out.close();
+        }
+      } catch (IOException e) {
+
+      }
+    }
+  }
+
+  private void writeTreeTimeToFile(String s, int j) {
+    File f = new File("/home/fan/tree.txt");
+    BufferedWriter out = null;
+    try {
+      out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(f, true)));
+      out.write(j + " " + s + "\n");
+    } catch (Exception e) {
+      e.printStackTrace();
+    }finally {
+      try {
+        if (out != null) {
+          out.close();
+        }
+      } catch (IOException e) {
+
+      }
+    }
+  }
+
+  private void writeOtherTimeToFile(String s, int j) {
+    File f = new File("/home/fan/other.txt");
+    BufferedWriter out = null;
+    try {
+      out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(f, true)));
+      out.write(j + " " + s + "\n");
+    } catch (Exception e) {
+      e.printStackTrace();
+    }finally {
+      try {
+        if (out != null) {
+          out.close();
+        }
+      } catch (IOException e) {
+
+      }
+    }
   }
 
 }

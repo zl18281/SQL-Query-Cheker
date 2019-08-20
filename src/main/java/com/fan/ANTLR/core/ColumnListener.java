@@ -48,12 +48,19 @@ public class ColumnListener extends MySqlParserBaseListener {
 
     for (int i = 0; i < actualColumns.length; i++) {
         if (checkPrefix(actualColumns[i])) {
-          if (!this.alias.containsKey(getPrefix(actualColumns[i]))) {
+          if (!this.alias.containsKey(getPrefix(actualColumns[i])) &&
+            !this.rightColumnSet.contains(removePrefix(actualColumns[i]))) {
+            errorColumns.add(actualColumns[i]);
+          }
+          /*
+          if (!this.alias.containsKey(getPrefix(actualColumns[i])) && ) {
             errorColumns.add(actualColumns[i]);
           }
           if (!this.rightColumnSet.contains(removePrefix(actualColumns[i]))) {
             errorColumns.add(actualColumns[i]);
           }
+
+           */
         } else {
           if (!this.rightColumnSet.contains(actualColumns[i]) ||
             checkAmbiguity(actualColumns[i])) {
@@ -87,13 +94,7 @@ public class ColumnListener extends MySqlParserBaseListener {
           this.errorColumns.get(this.errorColumns.size() - 1) + "\"}");
       }
     } catch (Exception e) {
-      System.out.println(e.toString());
-    }
 
-    for (int i = 0; i < this.actualColumnSet.size(); i++) {
-      System.out.println("*");
-      System.out.println(this.actualColumnSet.get(i));
-      System.out.println("*");
     }
   }
 
@@ -104,46 +105,32 @@ public class ColumnListener extends MySqlParserBaseListener {
     try {
       var asClause = ctx.getParent();
       var aggFunction = ctx.getParent().getParent().getParent();
-      System.out.println("XXXXX");
-      System.out.println(aggFunction.getText());
-      System.out.println(aggFunction.getClass());
-      System.out.println("XXXXX");
       if (aggFunction instanceof MySqlParser.AggregateFunctionCallContext) {
-        System.out.println("%%%");
         this.rightColumnSet.add(aggFunction.getParent().getChild(2).getText());
       }
       if (asClause.getChild(1).getText().equals("AS")) {
         if (!this.columnAlias.containsKey(asClause.getChild(1).getText())) {
           this.columnAlias.put(ctx.getParent().getChild(2).getText(), ctx.getText());
-          Iterator itOne = this.columnAlias.keySet().iterator();
-          Iterator itTwo = this.columnAlias.values().iterator();
-          while (itOne.hasNext() && itTwo.hasNext()) {
-            System.out.println(itOne.next() + " " + itTwo.next());
-          }
         }
       }
 
     } catch (Exception e) {
-      System.out.println(e.toString());
+
     }
 
     if (checkPrefix(ctx.getText())) {
-      System.out.println(ctx.getText());
       if (checkTableAlias(removePrefix(ctx.getText()))) {
         String original = this.alias.get(getPrefix(ctx.getText())) + "." + removePrefix(ctx.getText());
-        System.out.println(original);
         if (checkAmbiguity(removePrefix(original)) && !checkAmbiguity(original)) {
           this.actualColumnSet.add(original);
         } else {
           this.actualColumnSet.add(removePrefix(original));
         }
       } else {
-        System.out.println();
         if ((checkAmbiguity(removePrefix(ctx.getText())) && !checkAmbiguity(ctx.getText())) ||
           !this.alias.containsKey(getPrefix(ctx.getText()))) {
           this.actualColumnSet.add(ctx.getText());
         } else {
-          System.out.println("**");
           this.actualColumnSet.add(removePrefix(ctx.getText()));
         }
       }
@@ -196,7 +183,6 @@ public class ColumnListener extends MySqlParserBaseListener {
 
     for (int i = 0; i < this.actualColumnSet.size(); i++) {
       actualColumns[i] = this.actualColumnSet.get(i);
-      System.out.println(this.actualColumnSet.get(i));
     }
     return actualColumns;
   }
@@ -213,7 +199,7 @@ public class ColumnListener extends MySqlParserBaseListener {
       }
       connection.close();
     } catch (Exception e) {
-      e.printStackTrace();
+
     }
   }
 

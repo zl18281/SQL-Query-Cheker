@@ -55,10 +55,10 @@ public class SelectListener extends MySqlParserBaseListener {
           pw.print("\"" + wrongColumns.length + "\":" + "\"" +
             wrongColumns[wrongColumns.length - 1] + "\"}");
         }catch(Exception ex) {
-          ex.printStackTrace();
+
         }
       }
-      e.printStackTrace();
+
     }
   }
 
