@@ -27,6 +27,16 @@ public class TableListener extends MySqlParserBaseListener {
     getRightTables();
   }
 
+  private void removeDuplicate() {
+    for(int i = 0 ; i  <  this.errorTables.size() - 1; i ++ )  {
+      for(int j = this.errorTables.size() - 1; j > i; j-- )  {
+        if  (this.errorTables.get(j).equals(this.errorTables.get(i)))  {
+          this.errorTables.remove(j);
+        }
+      }
+    }
+  }
+
   @Override
   public void enterTableName(MySqlParser.TableNameContext ctx) {
     super.enterTableName(ctx);
@@ -80,6 +90,8 @@ public class TableListener extends MySqlParserBaseListener {
         errorTables.add(actualTableSet.get(i));
       }
     }
+
+    removeDuplicate();
 
     File f = new File("../webapps/SQL/WEB-INF/resources/error/tableError.json");
     try (PrintWriter pw = new PrintWriter(f)) {
