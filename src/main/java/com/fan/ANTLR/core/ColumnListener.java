@@ -49,7 +49,7 @@ public class ColumnListener extends MySqlParserBaseListener {
 
     for (int i = 0; i < actualColumns.length; i++) {
         if (checkPrefix(actualColumns[i])) {
-          if (!this.alias.containsKey(getPrefix(actualColumns[i])) &&
+          if (!this.alias.containsKey(getPrefix(actualColumns[i])) ||
             !this.rightColumnSet.contains(removePrefix(actualColumns[i]))) {
             errorColumns.add(actualColumns[i]);
           }

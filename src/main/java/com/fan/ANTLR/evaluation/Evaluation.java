@@ -11,6 +11,7 @@ public class Evaluation {
 
     File f = new File("/home/fan/testing.sql");
 
+/*
     String sl = "SELECT \n" +
       "t1.region1 AS region,\n" +
       "t1.men AS men,\n" +
@@ -58,10 +59,13 @@ public class Evaluation {
     }
     System.out.println(cnt);
 
-    int r = 0;
-    for(int j = 1; j <= 1000; j++) {
+ */
+
+    //int r = 0;
+    for(int j = 5; j <= 500; j+=5) {
       StringBuilder query = new StringBuilder();
       try (PrintWriter fw = new PrintWriter(f)) {
+        /*
         ArrayList<String> tokenCopy = new ArrayList<>();
         for(int i = 0; i < token.size(); i++) {
           tokenCopy.add(token.get(i));
@@ -76,6 +80,9 @@ public class Evaluation {
         }
         fw.println(sb);
         token = tokenCopy;
+
+         */
+
 
 
         //test syntax and semantic errors
@@ -105,35 +112,11 @@ public class Evaluation {
 
 
         //test right syntax
-/*
         for (int i = 0; i < j; i++) {
-          fw.println("SELECT \n" +
-            "    c.name AS CLU,\n" +
-            "    o.name AS occupation,\n" +
-            "    CASE s.gender\n" +
-            "        WHEN 1 THEN 'female'\n" +
-            "        WHEN 0 THEN 'male'\n" +
-            "        ELSE 'X'\n" +
-            "    END AS gender,\n" +
-            "    SUM(s.data) AS N\n" +
-            "FROM\n" +
-            "    Occupation o\n" +
-            "        INNER JOIN\n" +
-            "    Statistic s ON o.Id = s.occId\n" +
-            "        INNER JOIN\n" +
-            "    Ward w ON s.wardId = w.code\n" +
-            "        INNER JOIN\n" +
-            "    County c ON w.parent = c.code\n" +
-            "        INNER JOIN\n" +
-            "    Region r ON c.parent = r.code\n" +
-            "WHERE\n" +
-            "    r.code = 'E12000002'\n" +
-            "GROUP BY c.code , o.Id , s.gender\n" +
-            "HAVING N >= 10000\n" +
-            "ORDER BY N;");
+          fw.println("SELECT data FROM Statistic\n" +
+            "WHERE wardId = 'E05001982'\n" +
+            "AND occId = 2 AND gender = 0;");
         }
-
- */
 
       } catch (Exception e) {
         e.printStackTrace();
@@ -146,7 +129,7 @@ public class Evaluation {
       } catch (Exception e) {
         e.printStackTrace();
       }
-      ParserDemo p = new ParserDemo(query.toString(), "census", "student", "", r);
+      ParserDemo p = new ParserDemo(query.toString(), "census", "student", "", j);
       long startTime = new Date().getTime();
       p.parseSql();
       long endTime = new Date().getTime();
@@ -155,7 +138,7 @@ public class Evaluation {
       BufferedWriter out = null;
       try {
         out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(fs, true)));
-        out.write(r + " " + Double.toString((endTime - startTime) / 1000.0) + "\n");
+        out.write(j + " " + Double.toString((endTime - startTime) / 1000.0) + "\n");
       } catch (Exception e) {
         e.printStackTrace();
       } finally {

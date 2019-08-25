@@ -53,7 +53,6 @@ function compileOne() {
 
         console.log(errorInfo['errorLine']);
         document.getElementById('result').innerHTML =
-          'Stack: ' + '<br>' + errorInfo['stack'] + '<br><br>' +
           'Line: ' + '<br>' + errorInfo['line'] + '<br><br>' +
           'Char Position In Line' + '<br>' + errorInfo['charPositionInLine'] + '<br><br>' +
           'Offending Symbol' + '<br>' + errorInfo['offendingSymbol'] + '<br><br>' +
