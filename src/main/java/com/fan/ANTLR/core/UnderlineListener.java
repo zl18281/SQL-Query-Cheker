@@ -109,15 +109,6 @@ public class UnderlineListener extends BaseErrorListener {
 
     }
 
-    //for research only
-    File f = new File("/home/fan/error.json");
-    try(Scanner fr = new Scanner(errorInfo); FileWriter fw = new FileWriter(f)) {
-      while(fr.hasNext()) {
-        fw.write(fr.next());
-      }
-    }catch(Exception ex) {
-
-    }
   }
 }
 

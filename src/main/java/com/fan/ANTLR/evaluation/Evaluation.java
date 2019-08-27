@@ -62,7 +62,7 @@ public class Evaluation {
  */
 
     //int r = 0;
-    for(int j = 5; j <= 500; j+=5) {
+    for(int j = 5; j <= 200; j+=5) {
       StringBuilder query = new StringBuilder();
       try (PrintWriter fw = new PrintWriter(f)) {
         /*
@@ -87,7 +87,6 @@ public class Evaluation {
 
         //test syntax and semantic errors
 
-/*
         for (int i = 1; i < j; i++) {
           fw.println("SELECT SUM(s.data) AS num_people, o.name AS occ_class\n" +
             "FROM Statistic s\n" +
@@ -95,8 +94,8 @@ public class Evaluation {
             "WHERE s.wardId = 'E05008884'\n" +
             "GROUP BY o.id;");
         }
-        fw.println("SELECT SUM(s.data) AS num_people, o.nam AS occ_class\n" +
-          "FROM Statistic s\n" +
+        fw.println("SELECT SUM(s.data) AS num_people, o.name AS occ_class\n" +
+          "FROM Statisti s\n" +
           "INNER JOIN Occupation o ON s.occId = o.id\n" +
           "WHERE s.wardId = 'E05008884'\n" +
           "GROUP BY o.id;");
@@ -108,15 +107,19 @@ public class Evaluation {
             "GROUP BY o.id;");
         }
 
- */
 
 
+/*
         //test right syntax
         for (int i = 0; i < j; i++) {
-          fw.println("SELECT data FROM Statistic\n" +
-            "WHERE wardId = 'E05001982'\n" +
-            "AND occId = 2 AND gender = 0;");
+          fw.println("SELECT SUM(s.data) AS num_people, o.name AS occ_class\n" +
+            "FROM Statistic s\n" +
+            "INNER JOIN Occupation o ON s.occId = o.Id\n" +
+            "WHERE s.wardId = 'E05008884'\n" +
+            "GROUP BY o.Id;");
         }
+
+ */
 
       } catch (Exception e) {
         e.printStackTrace();

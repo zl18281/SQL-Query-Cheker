@@ -48,21 +48,21 @@ public class ParserDemo {
     parser.removeErrorListeners();
     parser.addErrorListener(error);
 
-    long startSyntaxCheck = new Date().getTime(); //check time consumed for syntax analysis
+    //long startSyntaxCheck = new Date().getTime(); //check time consumed for syntax analysis
     ParseTree tree = parser.root();
-    long endSyntaxCheck = new Date().getTime(); //check time consumed for syntax analysis
-    writeSyntaxTimeToFile(Double.toString((endSyntaxCheck - startSyntaxCheck)/1000.0), run);
+    //long endSyntaxCheck = new Date().getTime(); //check time consumed for syntax analysis
+    //writeSyntaxTimeToFile(Double.toString((endSyntaxCheck - startSyntaxCheck)/1000.0), run);
 
-    long startSemanticCheck = new Date().getTime(); //check time consumed for semantic analysis
+    //long startSemanticCheck = new Date().getTime(); //check time consumed for semantic analysis
     ParseTreeWalker ptw = new ParseTreeWalker();
 
     TableListener tl = new TableListener(parser, this.database,
       this.username, this.password);
     ptw.walk(tl, tree);
-    var tableSet = tl.getTableSet();
+    var rightTableSet = tl.getRightTableSet();
 
     ColumnListener cl = new ColumnListener(parser, this.database,
-      this.username, this.password, tableSet, tl.getAlias());
+      this.username, this.password, rightTableSet, tl.getAlias());
     ptw.walk(cl, tree);
 
     SelectListener sl = new SelectListener(parser, this.database,
@@ -70,10 +70,10 @@ public class ParserDemo {
       tl.getActualTableSet(), cl, tl);
     ptw.walk(sl, tree);
 
-    long endSemanticCheck = new Date().getTime(); //check time consumed for semantic analysis
-    writeSemanticTimeToFile(Double.toString((endSemanticCheck - startSemanticCheck)/1000.0), run);
+    //long endSemanticCheck = new Date().getTime(); //check time consumed for semantic analysis
+    //writeSemanticTimeToFile(Double.toString((endSemanticCheck - startSemanticCheck)/1000.0), run);
 
-    long startBuildingTree = new Date().getTime();
+    //long startBuildingTree = new Date().getTime();
     List<String> rules = new ArrayList<>();
     String[] rulesNames = parser.makeRuleNames();
     for(int i = 0; i < rulesNames.length; i++) {
@@ -97,10 +97,10 @@ public class ParserDemo {
         System.out.println(System.getProperty("user.dir"));
         e.printStackTrace();
     }
-    long endBuildingTree = new Date().getTime();
-    writeTreeTimeToFile(Double.toString((endBuildingTree - startBuildingTree)/1000.0), run);
+    //long endBuildingTree = new Date().getTime();
+    //writeTreeTimeToFile(Double.toString((endBuildingTree - startBuildingTree)/1000.0), run);
 
-    long startOtherTask = new Date().getTime();
+    //long startOtherTask = new Date().getTime();
     File f = new File("../webapps/SQL/WEB-INF/resources/error/error.json");
     StringBuilder errorInfo = new StringBuilder();
     try (Scanner in = new Scanner(f)) {
@@ -115,8 +115,8 @@ public class ParserDemo {
     }catch (Exception ex) {
 
     }
-    long endOtherTask = new Date().getTime();
-    writeOtherTimeToFile(Double.toString((endOtherTask - startOtherTask)/1000.0), run);
+    //long endOtherTask = new Date().getTime();
+    //writeOtherTimeToFile(Double.toString((endOtherTask - startOtherTask)/1000.0), run);
 
     return errorInfo.toString();
   }

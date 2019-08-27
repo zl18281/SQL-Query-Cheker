@@ -63,9 +63,9 @@
     <h3>Instructions</h3>
     <ul>
       <li>Use Chrome Browser or the syntax tree will not display</li>
-      <li>Refresh page after login and then username is visible</li>
-      <li>First press "Init database", then "Init table"</li>
-      <li>Press "ANTLR" to check SQL syntax, and "Tree" to show syntax tree</li>
+      <li>First click "Init database", then select a DB and click "Init table"</li>
+      <li>Click "ANTLR" to check SQL syntax, and "Tree" to show syntax tree</li>
+      <li>Click "Semantic" to check semantic errors</li>
       <li>Query is executed and displayed by pressing "Execute Query"</li>
       <li>Script can be saved with a filename</li>
     </ul>

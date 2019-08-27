@@ -36,9 +36,9 @@ public class ColumnListener extends MySqlParserBaseListener {
   }
 
   private void removeDuplicate() {
-    for(int i = 0 ; i  <  this.errorColumns.size() - 1; i ++ )  {
-      for(int j = errorColumns.size() - 1; j > i; j-- )  {
-        if  (errorColumns.get(j).equals(errorColumns.get(i)))  {
+    for (int i = 0; i < this.errorColumns.size() - 1; i++) {
+      for (int j = errorColumns.size() - 1; j > i; j--) {
+        if (errorColumns.get(j).equals(errorColumns.get(i))) {
           errorColumns.remove(j);
         }
       }
@@ -47,21 +47,27 @@ public class ColumnListener extends MySqlParserBaseListener {
 
   public void getErrorColumns(String[] actualColumns) {
 
-    for (int i = 0; i < actualColumns.length; i++) {
+    try {
+      for (int i = 0; i < actualColumns.length; i++) {
         if (checkPrefix(actualColumns[i])) {
-          if (!this.alias.containsKey(getPrefix(actualColumns[i])) ||
-            !this.rightColumnSet.contains(removePrefix(actualColumns[i]))) {
-            errorColumns.add(actualColumns[i]);
+          System.out.println(actualColumns[i]);
+          if (this.tableSet.contains(getPrefix(actualColumns[i]))) {
+            if (!this.getRightColumnsForOneTable(getPrefix(actualColumns[i])).contains(removePrefix(actualColumns[i]))) {
+              errorColumns.add(removePrefix(actualColumns[i]));
+            }
+          } else {
+            System.out.println("2");
+            if (!this.alias.containsKey(getPrefix(actualColumns[i]))) {
+              errorColumns.add(actualColumns[i]);
+            } else {
+              System.out.println("3");
+              System.out.println(this.alias.get(getPrefix(actualColumns[i])));
+              if (!this.getRightColumnsForOneTable(this.alias.get(getPrefix(actualColumns[i]))).contains((removePrefix(actualColumns[i])))) {
+                errorColumns.add(removePrefix(actualColumns[i]));
+                System.out.println("*****");
+              }
+            }
           }
-          /*
-          if (!this.alias.containsKey(getPrefix(actualColumns[i])) && ) {
-            errorColumns.add(actualColumns[i]);
-          }
-          if (!this.rightColumnSet.contains(removePrefix(actualColumns[i]))) {
-            errorColumns.add(actualColumns[i]);
-          }
-
-           */
         } else {
           if (!this.rightColumnSet.contains(actualColumns[i]) ||
             checkAmbiguity(actualColumns[i])) {
@@ -78,6 +84,9 @@ public class ColumnListener extends MySqlParserBaseListener {
             }
           }
         }
+      }
+    } catch (Exception e) {
+      e.printStackTrace();
     }
 
     removeDuplicate();
@@ -96,15 +105,6 @@ public class ColumnListener extends MySqlParserBaseListener {
       }
     } catch (Exception e) {
 
-    }
-
-    File fs = new File("/home/fan/semanticError.json");
-    try(Scanner fr = new Scanner(f); FileWriter fw = new FileWriter(fs)) {
-      while(fr.hasNext()) {
-        fw.write(fr.next());
-      }
-    }catch(Exception ex) {
-        ex.printStackTrace();
     }
 
   }
@@ -129,33 +129,7 @@ public class ColumnListener extends MySqlParserBaseListener {
 
     }
 
-    if (checkPrefix(ctx.getText())) {
-      if (checkTableAlias(removePrefix(ctx.getText()))) {
-        String original = this.alias.get(getPrefix(ctx.getText())) + "." + removePrefix(ctx.getText());
-        if (checkAmbiguity(removePrefix(original)) && !checkAmbiguity(original)) {
-          this.actualColumnSet.add(original);
-        } else {
-          this.actualColumnSet.add(removePrefix(original));
-        }
-      } else {
-        if ((checkAmbiguity(removePrefix(ctx.getText())) && !checkAmbiguity(ctx.getText())) ||
-          !this.alias.containsKey(getPrefix(ctx.getText()))) {
-          this.actualColumnSet.add(ctx.getText());
-        } else {
-          this.actualColumnSet.add(removePrefix(ctx.getText()));
-        }
-      }
-    } else {
-      this.actualColumnSet.add(ctx.getText());
-    }
-  }
-
-  private boolean checkTableAlias(String columnNameWithAlias) {
-    if (this.alias.containsValue(removePrefix(columnNameWithAlias))) {
-      return true;
-    } else {
-      return false;
-    }
+    this.actualColumnSet.add(ctx.getText());
   }
 
   private boolean checkPrefix(String columnName) {
@@ -198,7 +172,8 @@ public class ColumnListener extends MySqlParserBaseListener {
     return actualColumns;
   }
 
-  private void getRightColumnsForOneTable(String table) {
+  private ArrayList<String> getRightColumnsForOneTable(String table) {
+    ArrayList<String> columnsForOneTable = new ArrayList<>();
     try {
       Class.forName("org.mariadb.jdbc.Driver");
       Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/" +
@@ -207,11 +182,14 @@ public class ColumnListener extends MySqlParserBaseListener {
       ResultSet resultSet = statement.executeQuery("DESC " + table);
       while (resultSet.next()) {
         this.rightColumnSet.add(resultSet.getString("Field"));
+        columnsForOneTable.add(resultSet.getString("Field"));
       }
       connection.close();
+      return columnsForOneTable;
     } catch (Exception e) {
 
     }
+    return null;
   }
 
   private void getRightColumns() {

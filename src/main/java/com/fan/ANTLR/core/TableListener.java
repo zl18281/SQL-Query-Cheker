@@ -115,8 +115,8 @@ public class TableListener extends MySqlParserBaseListener {
   }
 
 
-  public ArrayList<String> getTableSet() {
-    return this.actualTableSet;
+  public ArrayList<String> getRightTableSet() {
+    return this.rightTableSet;
   }
 
 }
