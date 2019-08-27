@@ -9,11 +9,7 @@
     <list default="true" id="bb616d6d-2d51-42c5-8de9-1088dff1d6ed" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/fan/ANTLR/core/ColumnListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/fan/ANTLR/core/ColumnListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/fan/ANTLR/core/ParserDemo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/fan/ANTLR/core/ParserDemo.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/fan/ANTLR/core/TableListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/fan/ANTLR/core/TableListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/fan/ANTLR/core/UnderlineListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/fan/ANTLR/core/UnderlineListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/fan/ANTLR/evaluation/Evaluation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/fan/ANTLR/evaluation/Evaluation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/index.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/index.jsp" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -56,7 +52,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/fan/ANTLR/core/ParserDemo.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="246">
+            <state relative-caret-position="417">
               <caret line="64" column="28" selection-start-line="64" selection-start-column="28" selection-end-line="64" selection-end-column="28" />
             </state>
           </provider>
@@ -65,26 +61,26 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/fan/ANTLR/core/UnderlineListener.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="531">
+            <state relative-caret-position="2090">
               <caret line="110" selection-start-line="110" selection-end-line="110" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/fan/ANTLR/core/TableListener.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="399">
-              <caret line="117" column="35" selection-start-line="117" selection-start-column="35" selection-end-line="117" selection-end-column="35" />
+            <state relative-caret-position="493">
+              <caret line="130" column="31" selection-start-line="130" selection-start-column="31" selection-end-line="130" selection-end-column="31" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/fan/ANTLR/core/ColumnListener.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="99">
-              <caret line="69" column="11" selection-start-line="69" selection-start-column="11" selection-end-line="69" selection-end-column="11" />
+            <state relative-caret-position="399">
+              <caret line="27" column="56" lean-forward="true" selection-start-line="27" selection-start-column="56" selection-end-line="27" selection-end-column="56" />
             </state>
           </provider>
         </entry>
@@ -192,9 +188,9 @@
         <option value="$PROJECT_DIR$/src/main/webapp/index.jsp" />
         <option value="$PROJECT_DIR$/src/main/java/com/fan/ANTLR/evaluation/Evaluation.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/fan/ANTLR/core/UnderlineListener.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/fan/ANTLR/core/TableListener.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/fan/ANTLR/core/ParserDemo.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/fan/ANTLR/core/ColumnListener.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/fan/ANTLR/core/TableListener.java" />
       </list>
     </option>
   </component>
@@ -244,8 +240,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
-      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -328,6 +322,8 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -656,18 +652,20 @@
       <workItem from="1566908035406" duration="577000" />
       <workItem from="1566909576059" duration="247000" />
       <workItem from="1566909877788" duration="179000" />
-      <workItem from="1566929862928" duration="6468000" />
+      <workItem from="1566929862928" duration="7361000" />
+      <workItem from="1566942607152" duration="465000" />
+      <workItem from="1566943281948" duration="2198000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="422898000" />
+    <option name="totallyTimeSpent" value="426454000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="67" y="25" width="1853" height="1055" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4814815" visible="true" weight="0.16546762" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4814815" visible="true" weight="0.16878805" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -1035,31 +1033,31 @@
     <entry file="file://$PROJECT_DIR$/src/main/webapp/js/tree.js">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/fan/ANTLR/core/ParserDemo.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="246">
-          <caret line="64" column="28" selection-start-line="64" selection-start-column="28" selection-end-line="64" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/fan/ANTLR/core/TableListener.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="399">
-          <caret line="117" column="35" selection-start-line="117" selection-start-column="35" selection-end-line="117" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/fan/ANTLR/core/UnderlineListener.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="531">
+        <state relative-caret-position="2090">
           <caret line="110" selection-start-line="110" selection-end-line="110" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/fan/ANTLR/core/ParserDemo.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="417">
+          <caret line="64" column="28" selection-start-line="64" selection-start-column="28" selection-end-line="64" selection-end-column="28" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/fan/ANTLR/core/ColumnListener.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="99">
-          <caret line="69" column="11" selection-start-line="69" selection-start-column="11" selection-end-line="69" selection-end-column="11" />
+        <state relative-caret-position="399">
+          <caret line="27" column="56" lean-forward="true" selection-start-line="27" selection-start-column="56" selection-end-line="27" selection-end-column="56" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/fan/ANTLR/core/TableListener.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="493">
+          <caret line="130" column="31" selection-start-line="130" selection-start-column="31" selection-end-line="130" selection-end-column="31" />
         </state>
       </provider>
     </entry>

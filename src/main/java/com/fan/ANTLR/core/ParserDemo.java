@@ -59,7 +59,7 @@ public class ParserDemo {
     TableListener tl = new TableListener(parser, this.database,
       this.username, this.password);
     ptw.walk(tl, tree);
-    var rightTableSet = tl.getRightTableSet();
+    var rightTableSet = tl.getActualRightTableSet();
 
     ColumnListener cl = new ColumnListener(parser, this.database,
       this.username, this.password, rightTableSet, tl.getAlias());

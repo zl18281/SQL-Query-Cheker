@@ -119,4 +119,15 @@ public class TableListener extends MySqlParserBaseListener {
     return this.rightTableSet;
   }
 
+  public  ArrayList<String> getActualRightTableSet() {
+    ArrayList<String> actualTableSet = this.getActualTableSet();
+    ArrayList<String> rightTableSet = this.getRightTableSet();
+    ArrayList<String> actualRightTableSet = new ArrayList<>();
+    for(int i = 0; i < actualTableSet.size(); i++) {
+      if(rightTableSet.contains(actualTableSet.get(i))) {
+        actualRightTableSet.add(actualTableSet.get(i));
+      }
+    }
+    return actualRightTableSet;
+  }
 }

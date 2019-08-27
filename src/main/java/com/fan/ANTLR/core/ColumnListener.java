@@ -69,18 +69,17 @@ public class ColumnListener extends MySqlParserBaseListener {
             }
           }
         } else {
-          if (!this.rightColumnSet.contains(actualColumns[i]) ||
-            checkAmbiguity(actualColumns[i])) {
-            if (!(this.columnAlias.containsKey(actualColumns[i]))) {
-              if (checkPrefix(actualColumns[i]) &&
-                !this.rightColumnSet.contains(removePrefix(columnAlias.get(actualColumns[i])))) {
-                errorColumns.add(actualColumns[i]);
-              } else if (!checkPrefix(actualColumns[i]) &&
-                !this.rightColumnSet.contains(columnAlias.get(actualColumns[i]))) {
-                errorColumns.add(actualColumns[i]);
-              } else {
-
-              }
+          System.out.println("#");
+          if (!this.rightColumnSet.contains(actualColumns[i])) {
+            System.out.println("##");
+            if (!this.columnAlias.containsKey(actualColumns[i])) {
+              System.out.println("###");
+              errorColumns.add(actualColumns[i]);
+            }
+          } else {
+            if (checkAmbiguity(actualColumns[i])) {
+              System.out.println("####");
+              errorColumns.add(actualColumns[i]);
             }
           }
         }
