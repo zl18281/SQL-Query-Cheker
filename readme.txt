@@ -38,5 +38,6 @@ recent update:
 1. Parsing and semantic checking is going on while typing. Result is updated continously.
 2. When syntax is right, there will be semantic check of correctness of columns and tables.
 3. When column is ambiguous, it is treated as semantic error. But with a table name(plus a ".") as prefix, it is treated as right. 
-4. Semantic check is limited to a single query.
+4. Table and column aliasing can be detected.
+5. Semantic check is limited to a single query.
 
